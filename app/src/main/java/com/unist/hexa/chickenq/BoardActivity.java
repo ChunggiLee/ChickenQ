@@ -1,9 +1,9 @@
 package com.unist.hexa.chickenq;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
@@ -19,7 +19,7 @@ import org.json.JSONArray;
 /**
  * Created by JM on 15. 8. 13..
  */
-public class BoardActivity extends Activity {
+public class BoardActivity extends AppCompatActivity {
 
     FloatingActionMenu floatingActionMenu;
 
