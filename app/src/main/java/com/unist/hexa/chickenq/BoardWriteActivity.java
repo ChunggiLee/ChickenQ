@@ -26,7 +26,7 @@ public class BoardWriteActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.make);
+        setContentView(R.layout.activity_board_write);
 
         final EditText TitleEdt = (EditText) findViewById(R.id.TitleEditText);
         Button MenuBtn = (Button)findViewById(R.id.MenuButton);
@@ -61,7 +61,7 @@ public class BoardWriteActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Title = TitleEdt.getText().toString();
-                Intent intent = new Intent(BoardWriteActivity.this, PartyActivity.class);
+                Intent intent = new Intent(BoardWriteActivity.this, BoardViewActivity.class);
                 intent.putExtra("Title", Title);
                 intent.putExtra("MenuStr", MenuStr);
                 intent.putExtra("PeopleStr", PeopleStr);

@@ -29,7 +29,7 @@ public class BoardListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);
+        setContentView(R.layout.activity_board_list);
         setTitle("게시판");
 
         setup_board();

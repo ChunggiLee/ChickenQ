@@ -8,12 +8,12 @@ import android.widget.TextView;
 /**
  * Created by user on 2015-08-11.
  */
-public class PartyActivity extends Activity {
+public class BoardViewActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.party);
+        setContentView(R.layout.activity_board_view);
 
         Intent parameter = getIntent();
         final String Title = parameter.getStringExtra("Title");

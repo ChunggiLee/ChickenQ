@@ -22,7 +22,7 @@
         <activity android:name=".BoardListActivity" />
         <activity android:name=".BoardSearchActivity"/>
         <activity android:name=".BoardWriteActivity"/>
-        <activity android:name="com.unist.hexa.chickenq.PartyActivity"/>
+        <activity android:name=".BoardViewActivity"/>
         <activity android:name="com.unist.hexa.chickenq.PartyListActivity"/>
 
     </application>

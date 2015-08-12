@@ -16,7 +16,7 @@ public class BoardSearchActivity extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.activity_board_search);
 
         et_search = (EditText) findViewById(R.id.SearchEditText);
 

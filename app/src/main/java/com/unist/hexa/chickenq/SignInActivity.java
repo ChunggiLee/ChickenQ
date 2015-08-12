@@ -13,7 +13,7 @@ public class SignInActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mail);
+        setContentView(R.layout.activity_signin);
 
         final EditText etID = (EditText) findViewById(R.id.IDEditText);
         final EditText etPassword = (EditText) findViewById(R.id.PasswordEditText);
