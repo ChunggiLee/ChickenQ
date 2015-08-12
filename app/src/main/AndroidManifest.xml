@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.unist.hexa.chickenq.SignInActivity"/>
-        <activity android:name="com.unist.hexa.chickenq.BoardActivity" />
+        <activity android:name=".BoardListActivity" />
         <activity android:name="com.unist.hexa.chickenq.SearchActivity"/>
         <activity android:name="com.unist.hexa.chickenq.WriteActivity"/>
         <activity android:name="com.unist.hexa.chickenq.PartyActivity"/>

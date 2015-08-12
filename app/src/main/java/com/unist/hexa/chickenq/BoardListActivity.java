@@ -19,7 +19,7 @@ import org.json.JSONArray;
 /**
  * Created by JM on 15. 8. 13..
  */
-public class BoardActivity extends AppCompatActivity {
+public class BoardListActivity extends AppCompatActivity {
 
     FloatingActionMenu floatingActionMenu;
 

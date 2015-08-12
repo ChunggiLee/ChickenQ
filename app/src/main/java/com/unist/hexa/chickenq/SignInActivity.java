@@ -29,7 +29,7 @@ public class SignInActivity extends Activity {
                 boolean success = !(portal_id.isEmpty() || portal_pw.isEmpty());
                 if (success) {
 //                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                    Intent intent = new Intent(getApplicationContext(), BoardActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
                     startActivity(intent);
                     finish();
                 }
