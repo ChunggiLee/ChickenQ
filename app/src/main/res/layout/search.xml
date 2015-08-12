@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/search">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="400"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/NewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/make1" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="18"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="260"/>
+        <EditText
+            android:id="@+id/SearchEditText"
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="1800"/>
+        <ImageButton
+            android:id="@+id/SearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/selector"
+            android:background="@android:color/transparent"/>
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="fill_parent"
+            android:layout_weight="250"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0px"
+        android:layout_weight="530"
+        android:weightSum="1">
+
+
+    </LinearLayout>
+
+</LinearLayout>
