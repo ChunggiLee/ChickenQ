@@ -1,4 +1,4 @@
-package com.unist.hexa.chickenq;
+package com.unist.hexa.chickenq.util;
 
 /**
  * 게시판 정보를 담고 있는 객체

@@ -14,7 +14,7 @@ import android.widget.Toast;
 /**
  * Created by user on 2015-08-11.
  */
-public class WriteActivity extends Activity {
+public class BoardWriteActivity extends Activity {
 
     String MenuStr;
     String PeopleStr;
@@ -61,7 +61,7 @@ public class WriteActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Title = TitleEdt.getText().toString();
-                Intent intent = new Intent(WriteActivity.this, PartyActivity.class);
+                Intent intent = new Intent(BoardWriteActivity.this, PartyActivity.class);
                 intent.putExtra("Title", Title);
                 intent.putExtra("MenuStr", MenuStr);
                 intent.putExtra("PeopleStr", PeopleStr);
@@ -74,7 +74,7 @@ public class WriteActivity extends Activity {
     private void MenuDialogSelectOption() {
         final String items[] = { "치킨", "피자", "짜장면", "탕수육", "패스트푸드"};
         MenuStr = items[0];
-        AlertDialog.Builder ab = new AlertDialog.Builder(WriteActivity.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(BoardWriteActivity.this);
         ab.setTitle("메뉴 선택");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -106,7 +106,7 @@ public class WriteActivity extends Activity {
 
     private void PeopleDialogSelectOption() {
         final String items[] = { "1명", "2명", "3명", "4명", "5명", "6명 이상"};
-        AlertDialog.Builder ab = new AlertDialog.Builder(WriteActivity.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(BoardWriteActivity.this);
         ab.setTitle("인원 선택");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
@@ -134,7 +134,7 @@ public class WriteActivity extends Activity {
 
     private void PlaceDialogSelectOption() {
         final String items[] = { "공학관", "경영관", "학생회관", "기숙사", "긱휴"};
-        AlertDialog.Builder ab = new AlertDialog.Builder(WriteActivity.this);
+        AlertDialog.Builder ab = new AlertDialog.Builder(BoardWriteActivity.this);
         ab.setTitle("장소 선택");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {

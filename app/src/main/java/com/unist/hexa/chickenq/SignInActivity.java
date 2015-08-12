@@ -28,7 +28,7 @@ public class SignInActivity extends Activity {
                 // TODO: Login statement
                 boolean success = !(portal_id.isEmpty() || portal_pw.isEmpty());
                 if (success) {
-//                    Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+//                    Intent intent = new Intent(getApplicationContext(), BoardSearchActivity.class);
                     Intent intent = new Intent(getApplicationContext(), BoardListActivity.class);
                     startActivity(intent);
                     finish();

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.unist.hexa.chickenq.BoardData;
 import com.unist.hexa.chickenq.R;
 
 import org.json.JSONArray;

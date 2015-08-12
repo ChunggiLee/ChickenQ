@@ -9,7 +9,7 @@ import android.widget.EditText;
 /**
  * Created by user on 2015-08-06.
  */
-public class SearchActivity extends Activity implements View.OnClickListener {
+public class BoardSearchActivity extends Activity implements View.OnClickListener {
 
     EditText et_search;
 
@@ -29,10 +29,10 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.SearchButton:
                 String search_str = et_search.getText().toString(); // TODO: Search progress
-                startActivity(new Intent(SearchActivity.this, PartyListActivity.class));
+                startActivity(new Intent(BoardSearchActivity.this, PartyListActivity.class));
                 break;
             case R.id.NewButton:
-                startActivity(new Intent(SearchActivity.this, WriteActivity.class));
+                startActivity(new Intent(BoardSearchActivity.this, BoardWriteActivity.class));
                 break;
         }
     }
