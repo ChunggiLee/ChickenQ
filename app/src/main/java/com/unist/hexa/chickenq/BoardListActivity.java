@@ -7,12 +7,14 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.unist.hexa.chickenq.util.AsyncJsonParser;
+import com.unist.hexa.chickenq.util.BoardData;
 import com.unist.hexa.chickenq.util.BoardListAdapter;
 
 import org.json.JSONArray;
@@ -20,7 +22,7 @@ import org.json.JSONArray;
 /**
  * Created by JM on 15. 8. 13..
  */
-public class BoardListActivity extends AppCompatActivity implements View.OnClickListener {
+public class BoardListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     FloatingActionMenu floatingActionMenu;
 
@@ -39,6 +41,8 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
 
     private void setup_board() {
         ListView listView = (ListView) findViewById(R.id.lv_board);
+
+        // For scrolling ListView
         final ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
         listView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -46,8 +50,13 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
                 return false;
             }
         });
+
+        // ListView setting
         mAdapter = new BoardListAdapter(this);
         listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
+
+        // Get Board List
         new AsyncJsonParser(new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -80,5 +89,13 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
         }
 
         floatingActionMenu.close(true);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        BoardData boardData = mAdapter.getBoardData(position);
+        Intent intent = new Intent(this, BoardViewActivity.class);
+        intent.putExtra("boardData", boardData);
+        startActivity(intent);
     }
 }

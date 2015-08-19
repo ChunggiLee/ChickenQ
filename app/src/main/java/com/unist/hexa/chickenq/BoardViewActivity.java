@@ -1,9 +1,10 @@
 package com.unist.hexa.chickenq;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.unist.hexa.chickenq.util.BoardData;
 
 /**
  * Created by user on 2015-08-11.
@@ -15,17 +16,15 @@ public class BoardViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_view);
 
-        Intent parameter = getIntent();
-        final String Title = parameter.getStringExtra("Title");
-        final String MenuStr = parameter.getStringExtra("MenuStr");
-        final String PeopleStr = parameter.getStringExtra("PeopleStr");
-        final String PlaceStr = parameter.getStringExtra("PlaceStr");
+        Bundle bundle = getIntent().getExtras();
+        BoardData boardData = bundle.getParcelable("boardData");
+        final String title = boardData.title;
+        final String contents = boardData.contents;
 
-        TextView TitleTv = (TextView) findViewById(R.id.TitleTextView);
-        TitleTv.setText(Title);
-        TextView ContentTv = (TextView) findViewById(R.id.ContentTextView);
-        ContentTv.setText("메뉴 : " + MenuStr + '\n' + "인원 : " + PeopleStr + '\n'
-                + "장소 : " + PlaceStr + '\n' );
+        TextView tv_title = (TextView) findViewById(R.id.TitleTextView);
+        tv_title.setText(title);
+        TextView tv_contents = (TextView) findViewById(R.id.ContentTextView);
+        tv_contents.setText(contents);
 
     }
 }
