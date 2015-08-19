@@ -139,4 +139,8 @@ public class BoardListAdapter extends BaseAdapter {
         }
         dataChange();
     }
+
+    public BoardData getBoardData(int position) {
+        return listDatas.get(position);
+    }
 }

@@ -21,7 +21,6 @@ public class BoardSearchActivity extends Activity implements View.OnClickListene
         et_search = (EditText) findViewById(R.id.SearchEditText);
 
         findViewById(R.id.SearchButton).setOnClickListener(this);
-        findViewById(R.id.NewButton).setOnClickListener(this);
     }
 
     @Override
@@ -30,9 +29,6 @@ public class BoardSearchActivity extends Activity implements View.OnClickListene
             case R.id.SearchButton:
                 String search_str = et_search.getText().toString(); // TODO: Search progress
                 startActivity(new Intent(BoardSearchActivity.this, PartyListActivity.class));
-                break;
-            case R.id.NewButton:
-                startActivity(new Intent(BoardSearchActivity.this, BoardWriteActivity.class));
                 break;
         }
     }

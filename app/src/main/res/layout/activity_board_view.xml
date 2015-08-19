@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/party_context">
-<LinearLayout
-    android:layout_width="0px"
-    android:layout_height="fill_parent"
-    android:layout_weight="10"/>
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"/>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0px"
@@ -16,35 +16,22 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="45"/>
+            android:layout_weight="30"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="제목:"/>
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="12"/>
             <TextView
                 android:id="@+id/TitleTextView"
                 android:layout_width="0px"
                 android:layout_height="20dp"
-                android:textSize="18dp"
-                android:layout_weight="10"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0px"
-            android:layout_weight="370">
-            <TextView
-                android:id="@+id/ContentTextView"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:layout_weight="100"
-
-                />
+                android:textSize="14dp"
+                android:layout_weight="60"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -53,45 +40,70 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="270">
+            android:layout_weight="670">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/ContentTextView"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"
+                android:textSize="17dp"
+                android:layout_weight="100"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0px"
             android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_height="0px"
             android:layout_weight="70">
-            <TextView
-                android:layout_width="0px"
-                android:layout_height="20dp"
-                android:layout_weight="30"
-                android:textSize="16dp"
-                android:text="댓글:"/>
-            <EditText
-                android:layout_width="0px"
-                android:layout_height="20dp"
-                android:layout_weight="200"/>
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:text="입력"/>
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:text="파티원"
+                android:textColor="#686868"
+                android:background="#ffdf4c"/><!--롱클릭 하고 있는 동안 팝업창?처럼 떠서 파티원이 보였으면 좋겠습니당.-->
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:text="Talk생성"
+                android:textColor="#686868"
+                android:background="#ffdf4c"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="300"/>
+            android:layout_weight="200">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
-            android:layout_weight="300"/>
+            android:layout_weight="20"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="70"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="50"/>
+            <ImageButton
+                android:id="@+id/chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="7"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0px"
         android:layout_height="fill_parent"
         android:layout_weight="10"/>
+
 </LinearLayout>

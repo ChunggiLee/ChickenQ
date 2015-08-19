@@ -9,20 +9,24 @@
     android:background="@drawable/search">
     <LinearLayout
         android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70"/>
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_weight="400"
-        android:weightSum="1">
-
-        <ImageButton
-            android:id="@+id/NewButton"
+        android:layout_weight="300"
+        android:gravity="center_horizontal">
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/make1" />
+            android:layout_height="25dp"
+            android:text="+PARTY"
+            android:textSize="15dp"
+            android:background="#ffdf4c"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="18"
+        android:layout_weight="20"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0px"
@@ -47,10 +51,5 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_weight="530"
-        android:weightSum="1">
-
-
-    </LinearLayout>
-
+        android:layout_weight="530"/>
 </LinearLayout>
