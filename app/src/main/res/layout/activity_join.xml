@@ -6,31 +6,33 @@
     android:background="@drawable/join">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="375"/>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="400"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="45"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="11"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_ID"
                 android:gravity="center_vertical"
-                android:layout_width="0dip"
-                android:layout_height="fill_parent"
-                android:textSize="10dip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
                 android:layout_weight="10"
-                android:text="asdfasdf"/>
+                android:inputType="text"
+                android:hint="아이디를 입력하세요."/>
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="10">
                 <Button
@@ -38,38 +40,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:textSize="10dip"
+                    android:textSize="10dp"
                     android:text="중복확인"/>
                 </LinearLayout>
             </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="70"/>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="45"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="11"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_Password"
                 android:gravity="center_vertical"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:textSize="10dip"
+                android:textSize="10dp"
                 android:layout_weight="10"
-                android:text="asdfasdfasdf"/>
+                android:inputType="text"
+                android:hint="비밀번호를 입력하세요."/>
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="10"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="78"/>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -77,18 +81,20 @@
             android:layout_weight="45"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="11"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_name"
                 android:gravity="center_vertical"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:textSize="10dip"
+                android:textSize="10dp"
                 android:layout_weight="10"
-                android:text="asdfasdfasdf"/>
+                android:inputType="text"
+                android:hint="이름을 입력하세요."/>
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="10">
                 <Button
@@ -96,65 +102,69 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:textSize="10dip"
+                    android:textSize="10dp"
                     android:text="실명확인"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="77"/>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="50"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="11"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_Email"
                 android:gravity="center_vertical"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:textSize="10dip"
+                android:textSize="10dp"
                 android:layout_weight="10"
-                android:text="asdfasdfasdf"/>
+                android:inputType="text"
+                android:hint="이메일을 입력하세요."/>
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="10">
                 <Button
+                    android:id="@+id/btn_identification"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:textSize="10dip"
+                    android:textSize="10dp"
                     android:text="인증번호전송"/>
                 </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="75"/>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="50"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="11"/>
-            <TextView
+            <EditText
+                android:id="@+id/edit_Number"
                 android:gravity="center_vertical"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:textSize="10dip"
+                android:textSize="10dp"
                 android:layout_weight="10"
-                android:text="asdfasdfasdf"/>
+                android:hint="인증번호를 입력하세요."/>
             <LinearLayout
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="10">
                 <Button
@@ -162,43 +172,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:textSize="10dip"
+                    android:textSize="10dp"
                     android:text="인증번호확인"/>
                 </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="0dip"
+            android:layout_height="0dp"
             android:layout_weight="40"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="300"
         android:gravity="center"
         android:orientation="vertical">
         <CheckBox
+            android:id="@+id/chb_Agree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dip"
+            android:textSize="10dp"
             android:text="제 3자에게 정보를 제공할 것을 동의합니다."/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" "
-            android:textSize="10dip"/>
+            android:textSize="10dp"/>
         <Button
+            android:id="@+id/btn_registor"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_width="60dip"
-            android:layout_height="30dip"
-            android:textSize="16dip"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="16dp"
             android:text="가 입"
             android:background="@android:color/white"/>
     </LinearLayout>
     <AbsoluteLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dip"
+        android:layout_height="0dp"
         android:layout_weight="500"/>
 </LinearLayout>
