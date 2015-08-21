@@ -59,14 +59,23 @@
                 android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="파티원"
-                android:textColor="#686868"
+                android:gravity="center"
+                android:textSize="13dp"
                 android:background="#ffdf4c"/><!--롱클릭 하고 있는 동안 팝업창?처럼 떠서 파티원이 보였으면 좋겠습니당.-->
             <Button
                 android:layout_width="70dp"
                 android:layout_height="25dp"
                 android:text="Talk생성"
-                android:textColor="#686868"
+                android:gravity="center"
+                android:textSize="13dp"
                 android:background="#ffdf4c"/>
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:text="파티탈퇴"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:background="@android:color/holo_red_light"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
