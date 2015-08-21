@@ -20,19 +20,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID"/>
+            android:text="ID: "
+            android:textSize="15dip"/>
         <EditText
             android:id="@+id/IDEditText"
             android:layout_width="0px"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:layout_weight="250"
             android:inputType="text"
-            android:hint="포탈 아이디를 입력하세요."/>
+            android:textSize="15dip"
+            android:background="@android:color/white"
+            android:hint=" 아이디를 입력하세요."
+            android:textColorHint="#c6c6c6"/>
         <LinearLayout
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_weight="100"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"/>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -45,28 +53,76 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"/>
+            android:textSize="15dip"
+            android:text="Password: "/>
         <EditText
             android:id="@+id/PasswordEditText"
             android:layout_width="0px"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:layout_weight="200"
             android:inputType="textPassword"
-            android:hint="비밀번호를 입력하세요."/>
+            android:textSize="15dip"
+            android:background="@android:color/white"
+            android:textColorHint="#c6c6c6"
+            android:hint=" 비밀번호를 입력하세요."/>
         <LinearLayout
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_weight="100"/>
     </LinearLayout>
-    <Button
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="5"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="13">
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="10"/>
+        <CheckBox
+            android:id="@+id/autoLoginCbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dip"
+            android:text="자동로그인"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:layout_weight="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13dip"
+                android:text="|"/>
+            </LinearLayout>
+        <Button
+            android:id="@+id/joinBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dip"
+            android:background="@android:color/transparent"
+            android:text="회원가입"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="10"/>
+        </LinearLayout>
+
+    <ImageButton
         android:id="@+id/checkBtn"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CHECK!"/>
+        android:src="@drawable/selector_check"
+        android:background="@android:color/transparent"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_weight="120"/>
+        android:layout_weight="115"/>
 </LinearLayout>

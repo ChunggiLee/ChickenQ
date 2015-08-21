@@ -17,10 +17,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="제목"/>
+            android:text="제목: "
+            android:textSize="15dp"/>
         <EditText
             android:id="@+id/TitleEditText"
             android:layout_width="0px"
+            android:textSize="15dp"
             android:layout_height="fill_parent"
             android:layout_weight="200"/>
         <LinearLayout
@@ -38,17 +40,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="음식종류"/>
+            android:textSize="13dp"
+            android:text="음식종류  "/>
         <Button
             android:id="@+id/MenuButton"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:background="#ffdf4c"
+            android:textSize="13dp"
+            android:gravity="center"
             android:text="목록"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="   "/>
         <TextView
             android:id="@+id/MenuTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:gravity="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -58,14 +70,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="인원"/>
+            android:textSize="13dp"
+            android:text="인원  "/>
         <Button
             android:id="@+id/PeopleButton"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:background="#ffdf4c"
+            android:textSize="13dp"
+            android:gravity="center"
             android:text="목록"/>
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="   "/>
+        <TextView
+            android:textSize="16dp"
+            android:gravity="center"
             android:id="@+id/PeopleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -76,16 +98,27 @@
         android:orientation="horizontal"
         android:layout_weight="50">
         <TextView
+            android:textSize="13dp"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="위치"/>
+            android:text="위치  "/>
         <Button
             android:id="@+id/PlaceButton"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:background="#ffdf4c"
+            android:textSize="13dp"
+            android:gravity="center"
             android:text="목록"/>
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="   "/>
+        <TextView
+            android:textSize="16dp"
+            android:gravity="center"
             android:id="@+id/PlaceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -98,16 +131,27 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="시간"/>
+            android:textSize="13dp"
+            android:gravity="center"
+            android:text="시간  "/>
         <Button
             android:id="@+id/UploadButton"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:background="#ffdf4c"
+            android:textSize="13dp"
+            android:gravity="center"
             android:text="설정"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:text="   "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:gravity="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -117,17 +161,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내용"/>
+            android:textSize="13dp"
+            android:gravity="center"
+            android:text="내용  "/>
         <EditText
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="13dp"/>
     </LinearLayout>
     <Button
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:background="#ffdf4c"
         android:layout_gravity="center_horizontal"
-        android:text="UPLOAD"/>
+        android:text="UPLOAD"
+        android:textSize="13dp"
+        android:gravity="center"/>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"

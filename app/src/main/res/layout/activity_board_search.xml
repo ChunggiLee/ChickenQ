@@ -14,19 +14,22 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0px"
-        android:layout_weight="300"
+        android:layout_weight="293"
         android:gravity="center_horizontal">
         <Button
+            android:id="@+id/Party"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="25dip"
             android:text="+PARTY"
+            android:gravity="center"
             android:textSize="15dp"
+            android:textColor="#FFFFFF"
             android:background="#ffdf4c"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="20"
+        android:layout_height="0dip"
+        android:layout_weight="10"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0px"
@@ -36,11 +39,22 @@
             android:id="@+id/SearchEditText"
             android:layout_width="0px"
             android:layout_height="fill_parent"
-            android:layout_weight="1800"/>
+            android:layout_weight="1800"
+            android:gravity="center_vertical"
+            android:textSize="16dip"
+            android:layout_gravity="center_vertical"
+            android:hint=" 검색어 입력XD"
+            android:background="@android:color/white"
+            android:textColorHint="#c6c6c6"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="40"/>
         <ImageButton
             android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/selector"
             android:background="@android:color/transparent"/>
         <LinearLayout
