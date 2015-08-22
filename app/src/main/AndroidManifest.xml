@@ -24,7 +24,7 @@
         <activity android:name=".BoardWriteActivity"/>
         <activity android:name=".BoardViewActivity"/>
         <activity android:name="com.unist.hexa.chickenq.PartyListActivity"/>
-        <activity android:name=".RegistorActivity"/>
+        <activity android:name=".SignUpActivity"/>
 
     </application>
 

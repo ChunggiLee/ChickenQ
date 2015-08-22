@@ -1,4 +1,4 @@
-package com.unist.hexa.chickenq.mail;
+package com.unist.hexa.chickenq.util;
 
 /**
  * Created by ichung-gi on 2015. 8. 20..
@@ -17,12 +17,12 @@ import javax.mail.internet.MimeMessage;
 import android.os.StrictMode;
 import android.util.Log;
 
-public class emailClient
+public class EmailClient
 {
     private String mMailHost = "smtp.gmail.com";
     private Session mSession;
 
-    public emailClient(String user, String pwd)
+    public EmailClient(String user, String pwd)
     {
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtp");
@@ -79,4 +79,4 @@ public class emailClient
             return new PasswordAuthentication(id, pw);
         } //PasswordAuthentication getPasswordAuthentication
     } //class EmailAuthenticator
-} // class emailClient
+} // class EmailClient
