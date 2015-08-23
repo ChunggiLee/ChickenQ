@@ -127,7 +127,7 @@ public class BoardListAdapter extends BaseAdapter {
                 data.user_id = jObj.getInt("user_id");
                 data.title = jObj.getString("title");
                 data.contents = jObj.getString("contents");
-                data.start_time = jObj.getInt("start_time");
+                data.start_time = jObj.getString("start_time");
                 data.menu = jObj.getInt("menu");
                 data.limit_num = jObj.getInt("limit_num");
                 data.location = jObj.getInt("location");

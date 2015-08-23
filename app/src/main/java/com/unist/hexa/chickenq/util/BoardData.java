@@ -11,7 +11,7 @@ public class BoardData implements Parcelable {
     public int user_id;
     public String title;
     public String contents;
-    public int start_time;
+    public String start_time;
     public int menu;
     public int limit_num;
     public int location;
@@ -40,7 +40,7 @@ public class BoardData implements Parcelable {
         readFromParcel(in);
     }
 
-    public BoardData(int _id, int user_id, String title, String contents, int start_time, int menu, int limit_num, int location, int duration) {
+    public BoardData(int _id, int user_id, String title, String contents, String start_time, int menu, int limit_num, int location, int duration) {
         this._id = _id;
         this.user_id = user_id;
         this.title = title;
@@ -61,7 +61,7 @@ public class BoardData implements Parcelable {
         dest.writeInt(this.user_id);
         dest.writeString(this.title);
         dest.writeString(this.contents);
-        dest.writeInt(this.start_time);
+        dest.writeString(this.start_time);
         dest.writeInt(this.menu);
         dest.writeInt(this.limit_num);
         dest.writeInt(this.location);
@@ -73,7 +73,7 @@ public class BoardData implements Parcelable {
         this.user_id = in.readInt();
         this.title = in.readString();
         this.contents = in.readString();
-        this.start_time = in.readInt();
+        this.start_time = in.readString();
         this.menu = in.readInt();
         this.limit_num = in.readInt();
         this.location = in.readInt();
