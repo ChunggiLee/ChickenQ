@@ -1,23 +1,21 @@
 navigation drawer - JM
 	- logout
-	- 내정보 - +MyInfoActivity
-	- 내글목록 - +MyBoardActivity
-	- 내파티 - +MyPartyActivity
-	- 프로필사진
-	- 파티기록 - +MyPartyLogActivity
+	- 내정보 - +MyInfoActivity - YJ
+	- 내글목록 - +MyBoardActivity - YJ
+	- 내파티 - +MyPartyActivity - YJ
+	- 프로필사진 - YJ
+	- 파티기록 - +MyPartyLogActivity - YJ
 
-글쓰기
+글쓰기 - CG
 
-로그아웃
-
-gcm
+gcm - JM
 	- 파티원참가 알림
 	- 다모인거 알림
 
-회전안되게
+회전안되게 - JM
 
-게시판디자인2
+게시판디자인2 - DH
 
-댓글디자인
+댓글디자인 - DH
 
-게시글 디자인
+게시글 디자인 - DH
