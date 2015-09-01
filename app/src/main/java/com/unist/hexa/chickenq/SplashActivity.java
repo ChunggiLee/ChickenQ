@@ -64,12 +64,15 @@ public class SplashActivity extends Activity {
 
             if (msg.what == -1 || result.compareTo("true") != 0) {
                 Toast.makeText(getApplicationContext(), "자동 로그인에 실패하였습니다. 다시 로그인해주세요", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), SignInActivity.class));
 
                 // Clear SharedPreference
                 SharedPreferences.Editor editor = loginPreferences.edit();
                 editor.remove("auto_login");
+                editor.remove("portal_id");
+                editor.remove("key");
                 editor.apply();
+
+                startActivity(new Intent(getApplicationContext(), SignInActivity.class));
             } else {
                 startActivity(new Intent(getApplicationContext(), BoardListActivity.class));
             }
