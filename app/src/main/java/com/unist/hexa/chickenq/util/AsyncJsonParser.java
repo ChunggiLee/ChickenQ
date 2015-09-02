@@ -11,8 +11,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,43 +20,81 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * JSON Parser using HttpClient
  */
-public class AsyncJsonParser extends AsyncTask<Void, Void, JSONArray> {
+public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
     private static final String TAG = "AsyncJsonParser";
 
-    Handler resultHandler;
-    String sendUrl;
-    Exception error;
-    public int what = 0;
+    private HashMap<String, String> getList, postList;
+
+    private Handler resultHandler;
+    private String url;
+    private Exception error;
+    private int what = 0;
+
+    public AsyncJsonParser(Handler handler, String url) {
+        this.resultHandler = handler;
+        this.url = url;
+        this.getList = new HashMap<>();
+        this.postList = new HashMap<>();
+    }
 
     public AsyncJsonParser(Handler handler, String url, String sql) {
         init(handler, url, sql);
-    }
-
-    public AsyncJsonParser(Handler handler, String url, String sql, int w) {
-        init(handler, url, sql);
-        what = w;
     }
 
     private void init(Handler handler, String url, String sql) {
         resultHandler = handler;
         try {
             String sql_urlencode = URLEncoder.encode(sql, "utf-8");
-            sendUrl = String.format("%s?sql=%s", url, sql_urlencode);
+            url = String.format("%s?sql=%s", url, sql_urlencode);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
+    public void setWhat(int what) {
+        this.what = what;
+    }
+
+    public void addGetParam(String key, String value) {
+        getList.put(key, value);
+    }
+
+    public void addPostParam(String key, String value) {
+        postList.put(key, value);
+    }
+
     @Override
-    protected JSONArray doInBackground(Void... params) {
+    protected JSONObject doInBackground(Void... params) {
+
+        // Apply GET Parameters
+        if (!getList.isEmpty()) {
+            url += "?";
+            Set key = getList.keySet();
+            for (Object aKey : key) {
+                String keyName = (String) aKey;
+                String valueName = getList.get(keyName);
+                try {
+                    url += String.format("%s=%s&", keyName, URLEncoder.encode(valueName, "utf-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        // Apply POST Parameters
+        // TODO
+
+        // Start request
         HttpJsonParser jParser = new HttpJsonParser();
         error = null;
         try {
-            return jParser.getJSONFromUrl(sendUrl);
+            return jParser.getJSONFromUrl(url);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
             error = e;
@@ -65,16 +103,16 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONArray> {
     }
 
     @Override
-    protected void onPostExecute(JSONArray jsonArray) {
-        super.onPostExecute(jsonArray);
+    protected void onPostExecute(JSONObject jsonObject) {
+        super.onPostExecute(jsonObject);
         if (resultHandler != null) {
-            if (jsonArray == null) {
+            if (jsonObject == null) {
                 Message msg = resultHandler.obtainMessage(-1);
                 msg.obj = error.getMessage();
                 resultHandler.sendMessage(msg);
             } else {
                 Message msg = resultHandler.obtainMessage(what);
-                msg.obj = jsonArray;
+                msg.obj = jsonObject;
                 resultHandler.sendMessage(msg);
             }
         }
@@ -88,7 +126,7 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONArray> {
         public static final String ERROR_BUFFER_CONVERT = "ERROR_BUFFER_CONVERT";
         public static final String ERROR_NO_RESULT = "ERROR_NO_RESULT";
 
-        public JSONArray getJSONFromUrl(String url) throws IOException, JSONException, RuntimeException {
+        public JSONObject getJSONFromUrl(String url) throws IOException, JSONException, RuntimeException {
             Log.d(TAG, "url: " + url);
 
             // Making HTTP request
@@ -124,10 +162,10 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONArray> {
                 json = sb.toString();
 
                 // try parse the string to a JSON object
-                JSONArray jArr = new JSONArray(json);
-                if (jArr.length() == 0)
+                JSONObject jObj = new JSONObject(json);
+                if (jObj.length() == 0)
                     throw new RuntimeException(ERROR_NO_RESULT);
-                return jArr;
+                return jObj;
 
             } catch (IOException e) {
                 throw new IOException(ERROR_BUFFER_CONVERT);

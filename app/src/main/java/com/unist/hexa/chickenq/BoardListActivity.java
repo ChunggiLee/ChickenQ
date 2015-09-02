@@ -17,16 +17,16 @@ import com.unist.hexa.chickenq.util.AsyncJsonParser;
 import com.unist.hexa.chickenq.util.BoardData;
 import com.unist.hexa.chickenq.util.BoardListAdapter;
 
-import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by JM on 15. 8. 13..
  */
 public class BoardListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private static final String BOARD_URL = "http://chickenq.hexa.pro/board/list.php";
 
     FloatingActionMenu floatingActionMenu;
-
-    private static final String BOARD_URL = "http://silvara.kr:8080/~silvara/mysql_to_json.php";
     BoardListAdapter mAdapter;
 
     @Override
@@ -64,10 +64,15 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
                 if (msg.what == -1) {
                     Toast.makeText(getApplicationContext(), "네트워크 연결 오류", Toast.LENGTH_LONG).show();
                 } else {
-                    mAdapter.parseJson((JSONArray) msg.obj);
+                    JSONObject jObj = (JSONObject) msg.obj;
+                    try {
+                        mAdapter.parseJson(jObj.getJSONArray("board"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }, BOARD_URL, "select * from board").execute();
+        }, BOARD_URL).execute();
     }
 
     private void setup_fab() {

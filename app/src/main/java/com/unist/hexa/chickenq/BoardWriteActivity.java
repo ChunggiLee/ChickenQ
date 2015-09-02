@@ -2,34 +2,49 @@ package com.unist.hexa.chickenq;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unist.hexa.chickenq.util.AsyncJsonParser;
+import com.unist.hexa.chickenq.util.BoardData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URL;
+
 /**
  * Created by user on 2015-08-11.
  */
 public class BoardWriteActivity extends Activity {
 
-    String MenuStr;
-    String PeopleStr;
-    String PlaceStr;
-    String Title;
-    int number;
-    int number1;
-    int number2;
+    private static final String TAG = "BoardWriteActivity";
+    private static final String WriteUrl = "http://chickenq.hexa.pro/board/write.php?";
+    EditText TitleEdt, ContentEdt;
+    String TitleStr, ContentStr, MenuStr, PeopleStr, PlaceStr, start_time;
+    int _id, user_id=10032, MenuNum, PeopleNum, PlaceNum, duration=100;
+    Button MenuBtn, PeopleBtn, PlaceBtn, UploadBtn;
+    Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_write);
 
-        final EditText TitleEdt = (EditText) findViewById(R.id.TitleEditText);
-        Button MenuBtn = (Button)findViewById(R.id.MenuButton);
+        TitleEdt = (EditText) findViewById(R.id.TitleEditText);
+        ContentEdt = (EditText) findViewById(R.id.ContentEdit);
+
+        MenuBtn = (Button)findViewById(R.id.MenuButton);
         MenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,35 +53,27 @@ public class BoardWriteActivity extends Activity {
         });
 
 
-        Button PeopleBtn = (Button)findViewById(R.id.PeopleButton);
+        PeopleBtn = (Button)findViewById(R.id.PeopleButton);
         PeopleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PeopleDialogSelectOption();
-
             }
         });
 
-        Button PlaceBtn = (Button)findViewById(R.id.PlaceButton);
+        PlaceBtn = (Button)findViewById(R.id.PlaceButton);
         PlaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PlaceDialogSelectOption();
-
             }
         });
 
-        Button UploadBtn = (Button) findViewById(R.id.UploadButton);
+        UploadBtn = (Button) findViewById(R.id.UploadButton);
         UploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Title = TitleEdt.getText().toString();
-                Intent intent = new Intent(BoardWriteActivity.this, BoardViewActivity.class);
-                intent.putExtra("Title", Title);
-                intent.putExtra("MenuStr", MenuStr);
-                intent.putExtra("PeopleStr", PeopleStr);
-                intent.putExtra("PlaceStr", PlaceStr);
-                startActivity(intent);
+                Upload();
             }
         });
     }
@@ -78,24 +85,24 @@ public class BoardWriteActivity extends Activity {
         ab.setTitle("메뉴 선택");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // 각 리스트를 선택했을때
-                number = whichButton;
-                }
-            }).setPositiveButton("Ok",
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // 각 리스트를 선택했을때
+                        MenuNum = whichButton;
+                    }
+                }).setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(getApplicationContext(), items[number] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), items[MenuNum] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
                         final TextView MenuTv = (TextView) findViewById(R.id.MenuTextView);
-                        MenuStr = items[number];
+                        MenuStr = items[MenuNum];
                         MenuTv.setText(MenuStr);
 
-                    // OK 버튼 클릭시 , 여기서 선택한 값을 메인 Activity 로 넘기면 된다.
-                    //Toast.makeText(getApplicationContext(), items[whichButton] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
-                    //final TextView MenuTv = (TextView) findViewById(R.id.MenuTextView);
-                    //MenuTv.setText(MenuStr);
-                }
-    }).setNegativeButton("Cancel",
+                        // OK 버튼 클릭시 , 여기서 선택한 값을 메인 Activity 로 넘기면 된다.
+                        //Toast.makeText(getApplicationContext(), items[whichButton] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
+                        //final TextView MenuTv = (TextView) findViewById(R.id.MenuTextView);
+                        //MenuTv.setText(MenuStr);
+                    }
+                }).setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Cancel 버튼 클릭시
@@ -112,15 +119,15 @@ public class BoardWriteActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // 각 리스트를 선택했을때
-                        number1 = whichButton;
+                        PeopleNum = whichButton;
                     }
                 }).setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // OK 버튼 클릭시 , 여기서 선택한 값을 메인 Activity 로 넘기면 된다.
-                        Toast.makeText(getApplicationContext(), items[number1] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), items[PeopleNum] + "선택되었습니다.",Toast.LENGTH_SHORT).show();
                         final TextView PeopleTv = (TextView) findViewById(R.id.PeopleTextView);
-                        PeopleStr = items[number1];
+                        PeopleStr = items[PeopleNum];
                         PeopleTv.setText(PeopleStr);
                     }
                 }).setNegativeButton("Cancel",
@@ -133,22 +140,22 @@ public class BoardWriteActivity extends Activity {
     }
 
     private void PlaceDialogSelectOption() {
-        final String items[] = { "공학관", "경영관", "학생회관", "기숙사", "긱휴"};
+        final String items[] = { "공학관", "경영관", "학생회관", "기숙사", "기숙사 휴게실"};
         AlertDialog.Builder ab = new AlertDialog.Builder(BoardWriteActivity.this);
         ab.setTitle("장소 선택");
         ab.setSingleChoiceItems(items, 0,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // 각 리스트를 선택했을때
-                        number2 = whichButton;
-                }
-    }).setPositiveButton("Ok",
+                        PlaceNum = whichButton;
+                    }
+                }).setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // OK 버튼 클릭시 , 여기서 선택한 값을 메인 Activity 로 넘기면 된다.
-                        Toast.makeText(getApplicationContext(), items[number2] + "선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), items[PlaceNum] + "선택되었습니다.", Toast.LENGTH_SHORT).show();
                         final TextView PlaceTv = (TextView) findViewById(R.id.PlaceTextView);
-                        PlaceStr = items[number2];
+                        PlaceStr = items[PlaceNum];
                         PlaceTv.setText(PlaceStr);
 
                     }
@@ -159,5 +166,30 @@ public class BoardWriteActivity extends Activity {
                     }
                 });
         ab.show();
+    }
+
+    public void Upload() {
+        TitleStr = TitleEdt.getText().toString();
+        ContentStr = ContentEdt.getText().toString();
+        Intent intent = new Intent(BoardWriteActivity.this, BoardViewActivity.class);
+
+        BoardData boardData = new BoardData(_id, user_id, TitleStr, ContentStr, start_time, MenuNum, PeopleNum, PlaceNum, duration);
+        intent.putExtra("boardData", boardData);
+
+        try{
+            URL url = new URL("http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
+
+            Log.d("url : ", "http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            url.openStream();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        startActivity(intent);
     }
 }
