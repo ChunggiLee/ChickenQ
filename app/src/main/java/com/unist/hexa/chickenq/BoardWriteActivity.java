@@ -2,12 +2,10 @@ package com.unist.hexa.chickenq;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unist.hexa.chickenq.util.AsyncJsonParser;
 import com.unist.hexa.chickenq.util.BoardData;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.net.URL;
 
@@ -186,10 +180,13 @@ public class BoardWriteActivity extends Activity {
 
             url.openStream();
 
+            finish();
+            startActivity(intent);
+
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(this, "오류!", Toast.LENGTH_LONG).show();
         }
 
-        startActivity(intent);
     }
 }
