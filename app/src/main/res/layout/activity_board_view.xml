@@ -61,29 +61,52 @@
                 android:text="파티원"
                 android:gravity="center"
                 android:textSize="13dp"
-                android:background="#ffdf4c"/><!--롱클릭 하고 있는 동안 팝업창?처럼 떠서 파티원이 보였으면 좋겠습니당.-->
+                android:background="#ffdf4c"
+                android:id="@+id/PartyPeopleBtn" /><!--롱클릭 하고 있는 동안 팝업창?처럼 떠서 파티원이 보였으면 좋겠습니당.-->
             <Button
                 android:layout_width="70dp"
                 android:layout_height="25dp"
-                android:text="Talk생성"
+                android:text="파티추가"
                 android:gravity="center"
                 android:textSize="13dp"
-                android:background="#ffdf4c"/>
+                android:background="#ffdf4c"
+                android:id="@+id/JoinBtn" />
             <Button
                 android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="파티탈퇴"
                 android:gravity="center"
                 android:textSize="13dp"
-                android:background="@android:color/holo_red_light"/>
+                android:background="@android:color/holo_red_light"
+                android:id="@+id/DropBtn" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0px"
             android:layout_weight="200">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+            <ScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/lv_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#000000"
+                        android:dividerHeight="1.5dp">
+
+                    </ListView>
+
+                </LinearLayout>
+
+            </ScrollView>
         </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -97,7 +120,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="50"/>
+                android:layout_weight="50"
+                android:id="@+id/CommentEdt" />
             <ImageButton
                 android:id="@+id/chat"
                 android:layout_width="wrap_content"
