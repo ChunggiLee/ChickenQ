@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.unist.hexa.chickenq.R;
@@ -13,7 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by JM on 15. 8. 13..
@@ -23,13 +29,13 @@ public class BoardListAdapter extends BaseAdapter {
     private ArrayList<BoardData> listDatas = new ArrayList<>();
 
     private class ViewHolder {
-        public TextView _id;
-        public TextView user_id;
         public TextView title;
-        public TextView contents;
-        public TextView start_time;
+        public TextView party_maker;
         public TextView menu;
         public TextView limit_num;
+
+        // Additional
+        public LinearLayout ll_additional;
         public TextView location;
         public TextView duration;
     }
@@ -64,15 +70,13 @@ public class BoardListAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_listview, null);
+            convertView = inflater.inflate(R.layout.custom_listview, parent, false);
 
-            holder._id = (TextView) convertView.findViewById(R.id.tv_id);
-            holder.user_id = (TextView) convertView.findViewById(R.id.tv_user_id);
             holder.title = (TextView) convertView.findViewById(R.id.tv_title);
-            holder.contents = (TextView) convertView.findViewById(R.id.tv_contents);
-            holder.start_time = (TextView) convertView.findViewById(R.id.tv_start_time);
+            holder.party_maker = (TextView) convertView.findViewById(R.id.tv_party_maker);
             holder.menu = (TextView) convertView.findViewById(R.id.tv_menu);
             holder.limit_num = (TextView) convertView.findViewById(R.id.tv_limit_num);
+            holder.ll_additional = (LinearLayout) convertView.findViewById(R.id.ll_additional_data);
             holder.location = (TextView) convertView.findViewById(R.id.tv_location);
             holder.duration = (TextView) convertView.findViewById(R.id.tv_duration);
 
@@ -82,17 +86,36 @@ public class BoardListAdapter extends BaseAdapter {
         }
 
         BoardData listData = listDatas.get(position);
-        holder._id.setText("_id: " + listData._id);
-        holder.user_id.setText("user_id: " + listData.user_id);
-        holder.title.setText("title: " + listData.title);
-        holder.contents.setText("contents: " + listData.contents);
-        holder.start_time.setText("start_time: " + listData.start_time);
-        holder.menu.setText("menu: " + listData.menu);
-        holder.limit_num.setText("limit_num: " + listData.limit_num);
-        holder.location.setText("location: " + listData.location);
-        holder.duration.setText("duration: " + listData.duration);
+        holder.title.setText(listData.title);
+        holder.party_maker.setText(""+listData.user_id);
+        holder.menu.setText(getMenu(listData.menu));
+        holder.limit_num.setText("" + listData.limit_num);
+        if (listData.additional_data_visible) {
+            holder.ll_additional.setVisibility(View.VISIBLE);
+            holder.location.setText("위치: " + listData.location);
+            DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+            try {
+                Date startDate = sdFormat.parse(listData.start_time);
+                holder.duration.setText("남은시간: " + (new Date().getTime() - startDate.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            holder.ll_additional.setVisibility(View.GONE);
+        }
 
         return convertView;
+    }
+
+    String getMenu(int menu) {
+        switch(menu) {
+            case 0: return "치킨";
+            case 1: return "피자";
+            case 2: return "짜장면";
+            case 3: return "탕수육";
+            case 4: return "패스트푸드";
+            default: return "ERROR";
+        }
     }
 
     /**
@@ -132,6 +155,7 @@ public class BoardListAdapter extends BaseAdapter {
                 data.limit_num = jObj.getInt("limit_num");
                 data.location = jObj.getInt("location");
                 data.duration = jObj.getInt("duration");
+                data.additional_data_visible = false;
                 addItem(data);
             } catch (JSONException e) {
                 e.printStackTrace();

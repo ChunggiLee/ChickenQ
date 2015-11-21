@@ -16,6 +16,7 @@ public class BoardData implements Parcelable {
     public int limit_num;
     public int location;
     public int duration;
+    public boolean additional_data_visible;
 
     /**
      * Constructors

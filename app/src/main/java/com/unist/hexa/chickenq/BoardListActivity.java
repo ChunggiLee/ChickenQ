@@ -23,7 +23,7 @@ import org.json.JSONObject;
 /**
  * Created by JM on 15. 8. 13..
  */
-public class BoardListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class BoardListActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private static final String BOARD_URL = "http://chickenq.hexa.pro/board/list.php";
 
     FloatingActionMenu floatingActionMenu;
@@ -55,6 +55,7 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
         mAdapter = new BoardListAdapter(this);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
 
         // Get Board List
         new AsyncJsonParser(new Handler() {
@@ -83,7 +84,6 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        String text = "";
         switch(v.getId()) {
             case R.id.fab_write:
                 startActivity(new Intent(this, BoardWriteActivity.class));
@@ -102,5 +102,14 @@ public class BoardListActivity extends AppCompatActivity implements View.OnClick
         Intent intent = new Intent(this, BoardViewActivity.class);
         intent.putExtra("boardData", boardData);
         startActivity(intent);
+    }
+
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        BoardData boardData = mAdapter.getBoardData(position);
+        boardData.additional_data_visible = !boardData.additional_data_visible;
+        mAdapter.dataChange();
+        return true;
     }
 }
