@@ -6,4 +6,5 @@
 
     <string name="signup_finish">회원가입을 축하드립니다.</string>
     <string name="signup_need_agree">개인정보 제공에 동의를 해주세요.</string>
+    <string name="sign_up"><u>회원가입</u></string>
 </resources>
