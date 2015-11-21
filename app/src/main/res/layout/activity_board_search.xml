@@ -9,67 +9,65 @@
     android:background="@drawable/search">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="70"/>
+        android:layout_height="0dip"
+        android:layout_weight="200"/>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0px"
-        android:layout_weight="300"
-        android:gravity="center_horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:text="+PARTY"
-            android:textSize="15dp"
-            android:background="#ffdf4c"/>
-        <ScrollView
-            android:id="@+id/scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <ListView
-                    android:id="@+id/lv_board"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-        </ScrollView>
-    </LinearLayout>
+        android:layout_height="0dip"
+        android:layout_weight="2300"/>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:orientation="horizontal">
+        android:layout_height="0dip"
+        android:layout_weight="10">
+
         <LinearLayout
-            android:layout_width="0px"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="260"/>
+            android:layout_weight="3"/>
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="20"
+            android:background="@drawable/search_menu"
+            android:layout_gravity="center_vertical"
+            android:hint="전체"
+            android:gravity="center_vertical"
+            android:textSize="15dp"
+            android:paddingLeft="15dp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
         <EditText
             android:id="@+id/SearchEditText"
-            android:layout_width="0px"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="1800"/>
+            android:padding="5dp"
+            android:background="@drawable/search_input"
+            android:layout_weight="80"
+            android:textSize="17dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical"
+            android:text="치킨 공학관치킨 치킨 공학관공학관치킨 공학관"
+            />
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"/>
         <ImageButton
             android:id="@+id/SearchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/selector"
-            android:background="@android:color/transparent"/>
-        <Button
-            android:id="@+id/DetailButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Detail"/>
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"/>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0px"
-        android:layout_weight="530"/>
+        android:layout_height="0dip"
+        android:layout_weight="50"/>
 </LinearLayout>
