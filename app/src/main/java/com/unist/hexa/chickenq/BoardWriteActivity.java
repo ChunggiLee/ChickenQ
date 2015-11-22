@@ -167,7 +167,7 @@ public class BoardWriteActivity extends Activity {
         ContentStr = ContentEdt.getText().toString();
         Intent intent = new Intent(BoardWriteActivity.this, BoardViewActivity.class);
 
-        BoardData boardData = new BoardData(_id, user_id, TitleStr, ContentStr, start_time, MenuNum, PeopleNum, PlaceNum, duration);
+        BoardData boardData = new BoardData(_id, user_id, TitleStr, ContentStr, start_time, MenuNum, PeopleNum, PlaceNum, duration, "test", false);
         intent.putExtra("boardData", boardData);
 
         try{

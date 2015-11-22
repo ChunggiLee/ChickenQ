@@ -16,6 +16,7 @@ public class BoardData implements Parcelable {
     public int limit_num;
     public int location;
     public int duration;
+    public String name;
     public boolean additional_data_visible;
 
     /**
@@ -35,13 +36,15 @@ public class BoardData implements Parcelable {
         this.limit_num = copy.limit_num;
         this.location = copy.location;
         this.duration = copy.duration;
+        this.name = copy.name;
+        this.additional_data_visible = copy.additional_data_visible;
     }
 
     public BoardData(Parcel in) {
         readFromParcel(in);
     }
 
-    public BoardData(int _id, int user_id, String title, String contents, String start_time, int menu, int limit_num, int location, int duration) {
+    public BoardData(int _id, int user_id, String title, String contents, String start_time, int menu, int limit_num, int location, int duration, String name, boolean additional_data_visible) {
         this._id = _id;
         this.user_id = user_id;
         this.title = title;
@@ -51,6 +54,8 @@ public class BoardData implements Parcelable {
         this.limit_num = limit_num;
         this.location = location;
         this.duration = duration;
+        this.name = name;
+        this.additional_data_visible = additional_data_visible;
     }
 
     /**
@@ -67,6 +72,8 @@ public class BoardData implements Parcelable {
         dest.writeInt(this.limit_num);
         dest.writeInt(this.location);
         dest.writeInt(this.duration);
+        dest.writeString(this.name);
+        dest.writeByte((byte) (this.additional_data_visible ? 1 : 0));
     }
 
     private void readFromParcel(Parcel in) {
@@ -79,6 +86,8 @@ public class BoardData implements Parcelable {
         this.limit_num = in.readInt();
         this.location = in.readInt();
         this.duration = in.readInt();
+        this.name = in.readString();
+        this.additional_data_visible = in.readByte() != 0;
     }
 
     public int describeContents() {
