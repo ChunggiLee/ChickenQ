@@ -87,7 +87,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                     editor.putBoolean("auto_login", true);
                 editor.apply();
 
-                startActivity(new Intent(getApplicationContext(), BoardListActivity.class));
+                startActivity(new Intent(getApplicationContext(), BoardActivity.class));
                 finish();
             }
         }

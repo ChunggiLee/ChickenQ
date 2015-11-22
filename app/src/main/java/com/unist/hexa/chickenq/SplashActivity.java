@@ -74,7 +74,7 @@ public class SplashActivity extends Activity {
 
                 startActivity(new Intent(getApplicationContext(), SignInActivity.class));
             } else {
-                startActivity(new Intent(getApplicationContext(), BoardListActivity.class));
+                startActivity(new Intent(getApplicationContext(), BoardActivity.class));
             }
             finish();
         }
