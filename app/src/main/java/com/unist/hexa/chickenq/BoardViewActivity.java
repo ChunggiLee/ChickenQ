@@ -3,32 +3,22 @@ package com.unist.hexa.chickenq;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unist.hexa.chickenq.util.AsyncJsonParser;
 import com.unist.hexa.chickenq.util.BoardData;
-import com.unist.hexa.chickenq.util.BoardListAdapter;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -43,7 +33,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -55,23 +44,20 @@ import java.util.HashMap;
  */
 public class BoardViewActivity extends Activity implements View.OnClickListener {
 
-    String UrlStr, text, SpaceStr="", nameStr, comment, mResult;
+    String UrlStr, text, SpaceStr="", nameStr, comment, mResult, name, portal;
     String userIdStr[];
     Bundle bundle;
     BoardData boardData;
     Window win;
     LinearLayout linear;
-    int num, userNum=0, pos, arrayLength, cancelNum;
+    int num, userNum=0, pos, arrayLength, check=0;
     EditText CommentEdt;
     ArrayList<HashMap<String, String>> oslist = new ArrayList<HashMap<String, String>>();
     ListView myList;
     SimpleAdapter adapter;
     HashMap<String, String> map;
     ImageButton cancelBtn;
-    LayoutInflater inflater;
-    View view1;
-
-
+    private int id1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +66,8 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         win.setContentView(R.layout.activity_board_view);
         oslist = new ArrayList<HashMap<String, String>>();
 
+        id1 = getSharedPreferences("setting_login", 0).getInt("id", 0);
+        portal  = getSharedPreferences("setting_login", 0).getString("portal_id", "");
         bundle = getIntent().getExtras();
         boardData = bundle.getParcelable("boardData");
 
@@ -132,7 +120,7 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.PartyPeopleBtn:
+            case R.id.PartyPeopleBtn: // Current Party members list
 
                 LayoutInflater inflater = (LayoutInflater) getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
@@ -157,22 +145,21 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
                 });
 
                 break;
-            case R.id.JoinBtn:
-                UrlStr = "http://chickenq.hexa.pro/party/join.php?boardid=" + boardData._id + "&userid=" + "10032";
+            case R.id.JoinBtn: // Join Party
+                UrlStr = "http://chickenq.hexa.pro/party/join.php?boardid=" + boardData._id + "&userid=" + id1;
                 urlOpenFunc();
+                Toast.makeText(this,"파티에 참여하셨습니다.",Toast.LENGTH_SHORT ).show();
                 break;
-            case R.id.DropBtn:
-                UrlStr = "http://chickenq.hexa.pro/party/drop.php?boardid=" + boardData._id + "&userid=" + "10032";
+            case R.id.DropBtn: // Drop Party
+                UrlStr = "http://chickenq.hexa.pro/party/drop.php?boardid=" + boardData._id + "&userid=" + id1;
                 urlOpenFunc();
+                Toast.makeText(this,"파티에 탈퇴하셨습니다.",Toast.LENGTH_SHORT ).show();
                 break;
 
-            case R.id.chat:
+            case R.id.chat: // Write chat
                 comment = CommentEdt.getText().toString();
                 nameStr = boardData.user_id + comment;
-
                 char ch[] = comment.toCharArray();
-
-                Log.d("comment.length()", " " + comment.length());
                 for (int i = 0; i < comment.length(); i++) {
                     if (ch[i] == ' ') {
                         SpaceStr += "%20";
@@ -180,38 +167,34 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
                         SpaceStr += ch[i];
                     }
                 }
-                Log.d("SpaceStr", SpaceStr);
                 comment = SpaceStr;
                 SpaceStr = "";
-                UrlStr = "http://chickenq.hexa.pro/reply/comment.php?boardid=" + boardData._id + "&userid=10032&content=" + comment;
+                UrlStr = "http://chickenq.hexa.pro/reply/comment.php?boardid=" + boardData._id + "&userid=" + id1 + "&content=" + comment;
+                urlOpenFunc();
+                check = 1;
+                getComment();
+                check = 0;
                 userNum++;
                 userIdStr = new String[userNum];
                 userIdStr[userNum - 1] = Integer.toString(boardData._id);
-                comment = boardData.user_id + " : " + comment;
+                comment = name + " : " + comment;
                 map = new HashMap<String, String>();
                 map.put("comment", comment);
                 map.put("cancelBtn", "CancelBtn");
                 oslist.add(map);
-                myList = (ListView) findViewById(R.id.lv_comment);
                 comment();
+                Toast.makeText(this,"댓글을 쓰셨습니다..",Toast.LENGTH_SHORT ).show();
                 break;
 
         }
-        Log.d("S3 : ", " s3 ");
-
-
         urlOpenFunc();
         CommentEdt.setText("");
-
     }
 
 
     public void urlOpenFunc() {
         try{
             URL url = new URL(UrlStr);
-
-            Log.d("UrlStr : ", UrlStr);
-
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
@@ -232,25 +215,26 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            readStream(conn.getInputStream(), txt);
-
+            BufferedReader reader = null;
+            reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
+            readStream(reader, txt);
         } catch (Exception e) {
             txt.setText("Error\n" + e.toString());
             e.printStackTrace();
         }
     }
 
-    private void readStream(InputStream in, TextView txt) {
-        BufferedReader reader = null;
-        reader = new BufferedReader(new InputStreamReader(in));
+    private void readStream(BufferedReader reader, TextView txt) {
+
         String line = "";
         try {
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
                 JSONObject json = new JSONObject(line);
                 num = json.getInt("num");
                 text = "인원 : " + num + '\n';
-                for (int i = 0; i < num; i++) {
-                    text += "이름 : " + Integer.toString(json.getInt("user" + i)) + "\n";
+                for (int i = 1; i <= num; i++) {
+                    text += "이름 : " + json.getString("name"+i) + "\n";
                 }
                 txt.append(text);
             }
@@ -297,46 +281,38 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
 
     private void processEntity(HttpEntity entity) throws IllegalStateException, IOException
     {
-        BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
+        BufferedReader br = null;
+        br = new BufferedReader(new InputStreamReader(entity.getContent(), "UTF-8"));
         String line, result = "";
-
+        br.readLine();
         while((line = br.readLine()) != null)
         {
             result += line;
         }
         mResult = result;
-
-        Log.d("result : ", result);
-
         try
         {
-            JSONArray array = new JSONArray(mResult);
-
-            arrayLength = array.length();
-
-            Log.d("arrayLength", " : " + arrayLength);
-
-            for(int i = 0 ; i < arrayLength ; i++)
-            {
-                JSONObject object = array.getJSONObject(i);
-                comment = object.getString("user_id") + " : " + object.getString("contents");
-
-                map = new HashMap<String, String>();
-                Log.d("comment : ", comment);
-
-                map.put("comment", comment);
-                map.put("cancelBtn", "CancelBtn");
-                oslist.add(map);
-                Log.d("Size : ", " " + map.size());
-                myList = (ListView) findViewById(R.id.lv_comment);
-                Log.d("before remove : ", " " + oslist.size());
-
-
+           if (check == 0) {
+               JSONArray array = new JSONArray(mResult);
+               arrayLength = array.length();
+               for (int i = 0; i < arrayLength; i++) {
+                   JSONObject object = array.getJSONObject(i);
+                   comment = object.getString("name") + " : " + object.getString("contents");
+                   map = new HashMap<String, String>();
+                   map.put("comment", comment);
+                   map.put("cancelBtn", "CancelBtn");
+                   oslist.add(map);
+                   myList = (ListView) findViewById(R.id.lv_comment);
+               }
+           }
+            if (check == 1){
+                JSONObject object = new JSONObject(mResult);
+                name = object.getString("name");
             }
+
         }
         catch(JSONException e)
         {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
             e.printStackTrace();
         }
 
@@ -346,7 +322,7 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         converView.findViewById(R.id.CancelBtn).setOnClickListener(this);
     }
     public void comment(){
-
+        myList = (ListView) findViewById(R.id.lv_comment);
         adapter = new SimpleAdapter(BoardViewActivity.this, oslist, R.layout.listitem, new String[]{"comment", "cancelBtn"}, new int[]{R.id.textView, R.id.CancelBtn});
         adapter.setViewBinder(new SimpleAdapter.ViewBinder() {
                                   @Override
@@ -357,29 +333,16 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
                                           cancelBtn.setOnClickListener(new View.OnClickListener() {
                                               @Override
                                               public void onClick(View v) {
-                                                  Log.d("adsf", "adsf");
-
                                                   View parentRow = (View) v.getParent();
                                                   ListView listView = (ListView) parentRow.getParent();
                                                   pos = listView.getPositionForView(parentRow);
 
-                                                  Log.d("pos : ", " " + pos);
                                                   if (pos != myList.INVALID_POSITION) {
-
-                                                      Log.d("Size : ", " " + oslist.size());
-
                                                       UrlStr = "http://chickenq.hexa.pro/reply/decomment.php?id=" + boardData._id + "&num=" + pos;
-                                                      Log.d("Decoment : ", UrlStr);
                                                       oslist.remove(pos);
                                                       getComment();
-                                                      Log.d("after remove : ", " " + oslist.size());
                                                       urlOpenFunc();
-                                                      for (int i = 0; i < oslist.size(); i++) {
-                                                          Log.d("after remove : ", " " + oslist.get(i));
-                                                      }
-                                                      Log.d("S1 : ", "s1 ");
                                                       adapter.notifyDataSetChanged();
-                                                      Log.d("S2 : ", " s2 ");
                                                       myList.setAdapter(adapter);
                                                   }
                                               }
@@ -391,7 +354,6 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
                                   }
                               }
         );
-        //adapter = new SimpleAdapter(BoardViewActivity.this, oslist, R.layout.listitem, new String[]{"comment", "cancelBtn"}, new int[]{R.id.textView, R.id.CancelBtn});
         myList.setAdapter(adapter);
     }
 }
