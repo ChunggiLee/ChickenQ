@@ -231,10 +231,16 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 JSONObject json = new JSONObject(line);
+                Log.d("line", " " +line);
                 num = json.getInt("num");
-                text = "인원 : " + num + '\n';
-                for (int i = 1; i <= num; i++) {
-                    text += "이름 : " + json.getString("name"+i) + "\n";
+                Log.d("num", " " +num);
+                if (num == 0) {
+                    text = "현재 파티에 아무도 없습니다.";
+                }else {
+                    text = "인원 : " + num + '\n';
+                    for (int i = 1; i <= num; i++) {
+                        text += "이름 : " + json.getString("name" + i) + "\n";
+                    }
                 }
                 txt.append(text);
             }
