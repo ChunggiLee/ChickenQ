@@ -29,6 +29,7 @@ public class BoardListAdapter extends BaseAdapter {
     private ArrayList<BoardData> listDatas = new ArrayList<>();
 
     public static int search_menu, search_place;
+    public static String search_text = "";
 
     private class ViewHolder {
         public TextView title;
@@ -108,7 +109,8 @@ public class BoardListAdapter extends BaseAdapter {
 
         LinearLayout ll_parent = (LinearLayout) convertView.findViewById(R.id.parent_layout);
         if ((search_menu != 0 && listData.menu != search_menu-1) ||
-                (search_place != 0 && listData.location != search_place-1)) {
+                (search_place != 0 && listData.location != search_place-1) ||
+                !(listData.title.contains(search_text))) {
             ll_parent.setVisibility(View.GONE);
         } else {
             ll_parent.setVisibility(View.VISIBLE);

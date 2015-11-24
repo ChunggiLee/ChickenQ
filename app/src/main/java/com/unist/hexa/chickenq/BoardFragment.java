@@ -49,6 +49,7 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
         // Search init
         BoardListAdapter.search_menu = 0;
         BoardListAdapter.search_place = 0;
+        BoardListAdapter.search_text = "";
 
         // For scrolling ListView
         final ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.scrollview);
