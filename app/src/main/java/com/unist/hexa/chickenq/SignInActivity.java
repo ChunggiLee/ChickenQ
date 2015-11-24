@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.unist.hexa.chickenq.util.AsyncJsonParser;
@@ -16,13 +19,19 @@ import com.unist.hexa.chickenq.util.AsyncJsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
 public class SignInActivity extends Activity implements View.OnClickListener {
     private final static String CHECK_URL = "http://chickenq.hexa.pro/user/check.php";
+    private String ID_URL = "http://chickenq.hexa.pro/user/getfpid.php?pid=";
 
     EditText etID, etPW;
     CheckBox ckbAutoLogin;
@@ -83,6 +92,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 SharedPreferences.Editor editor = loginPreferences.edit();
                 editor.putString("portal_id", etID.getText().toString());
                 editor.putString("key", getMD5(etPW.getText().toString()));
+                ID_URL += etID.getText().toString();
+                urlReadFunc();
                 if (ckbAutoLogin.isChecked())
                     editor.putBoolean("auto_login", true);
                 editor.apply();
@@ -109,4 +120,47 @@ public class SignInActivity extends Activity implements View.OnClickListener {
             throw new RuntimeException(e);
         }
     }
+
+    public void urlReadFunc() {
+        try{
+            URL url = new URL(ID_URL);
+            URLConnection conn = url.openConnection();
+            conn.setDoInput(true);
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            readStream(conn.getInputStream());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readStream(InputStream in) {
+        BufferedReader reader = null;
+        reader = new BufferedReader(new InputStreamReader(in));
+        String line = "";
+        try {
+            while ((line = reader.readLine()) != null) {
+                JSONObject json = new JSONObject(line);
+                SharedPreferences.Editor editor = loginPreferences.edit();
+                editor.putInt("id", json.getInt("id"));
+                editor.apply();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (reader != null) reader.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }
