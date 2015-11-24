@@ -41,6 +41,7 @@ public class BoardSearchDialogFragment extends DialogFragment implements View.On
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("menu", menuSpinner.getSelectedItemPosition());
                 editor.putInt("place", placeSpinner.getSelectedItemPosition());
+                editor.apply();
                 break;
             case R.id.CancelButton: break;
         }
