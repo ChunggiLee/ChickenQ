@@ -221,6 +221,9 @@ public class BoardWriteActivity extends Activity {
             StrictMode.setThreadPolicy(policy);
 
             url.openStream();
+            int id1 = getSharedPreferences("setting_login", 0).getInt("id", 0);
+            URL UrlStr = new URL ("http://chickenq.hexa.pro/party/join.php?boardid=" + boardData._id + "&userid=" + id1);
+            UrlStr.openStream();
 
             finish();
             startActivity(intent);
