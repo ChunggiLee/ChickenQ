@@ -3,23 +3,15 @@ package com.unist.hexa.chickenq;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
-
-import com.unist.hexa.chickenq.util.BoardData;
-import com.unist.hexa.chickenq.util.BoardListAdapter;
 
 /**
  * Created by user on 2015-08-06.
  */
-public class BoardActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, DialogInterface.OnDismissListener {
-
-    BoardListAdapter mAdapter;
+public class BoardActivity extends AppCompatActivity implements View.OnClickListener {
     EditText et_search;
 
     @Override
@@ -57,18 +49,5 @@ public class BoardActivity extends AppCompatActivity implements View.OnClickList
                 newFragment.show(ft, "dialog");
                 break;
         }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        BoardData boardData = mAdapter.getBoardData(position);
-        Intent intent = new Intent(this, BoardViewActivity.class);
-        intent.putExtra("boardData", boardData);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        mAdapter.dataChange();
     }
 }
