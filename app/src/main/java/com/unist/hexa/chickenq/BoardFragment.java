@@ -29,7 +29,7 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
     private static final String BOARD_URL = "http://chickenq.hexa.pro/board/list.php";
 
     FloatingActionMenu floatingActionMenu;
-    BoardListAdapter mAdapter;
+    public static BoardListAdapter mAdapter;
 
     @Nullable
     @Override
@@ -45,6 +45,10 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
 
     private void setup_board(View rootView) {
         ListView listView = (ListView) rootView.findViewById(R.id.lv_board);
+
+        // Search init
+        BoardListAdapter.search_menu = 0;
+        BoardListAdapter.search_place = 0;
 
         // For scrolling ListView
         final ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.scrollview);

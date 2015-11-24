@@ -1,14 +1,16 @@
 package com.unist.hexa.chickenq;
 
 import android.app.DialogFragment;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import com.unist.hexa.chickenq.util.BoardListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,7 @@ import java.util.Arrays;
  * Created by JM on 2015. 11. 21..
  */
 public class BoardSearchDialogFragment extends DialogFragment implements View.OnClickListener {
+    private final static String TAG = "BoardSearchDialogFrag";
     private final static String menuItems[] = { "전체", "치킨", "피자", "짜장면", "탕수육", "패스트푸드"};
     private final static String placeItems[] = { "전체", "공학관", "경영관", "학생회관", "기숙사", "기숙사 휴게실"};
 
@@ -37,11 +40,11 @@ public class BoardSearchDialogFragment extends DialogFragment implements View.On
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.OkButton:
-                SharedPreferences pref = getActivity().getSharedPreferences("search", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putInt("menu", menuSpinner.getSelectedItemPosition());
-                editor.putInt("place", placeSpinner.getSelectedItemPosition());
-                editor.apply();
+                BoardListAdapter.search_menu = menuSpinner.getSelectedItemPosition();
+                BoardListAdapter.search_place = placeSpinner.getSelectedItemPosition();
+                Log.d(TAG, String.format("menu=%d/place=%d",
+                        BoardListAdapter.search_menu,
+                        BoardListAdapter.search_place));
                 break;
             case R.id.CancelButton: break;
         }
@@ -62,5 +65,11 @@ public class BoardSearchDialogFragment extends DialogFragment implements View.On
         placeSpinner = (Spinner) rootView.findViewById(R.id.PlaceSpinner);
         placeSpinner.setPrompt("장소를 선택하세요");
         placeSpinner.setAdapter(PlaceAdapter);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        BoardFragment.mAdapter.dataChange();
     }
 }

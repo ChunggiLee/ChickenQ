@@ -1,7 +1,7 @@
 package com.unist.hexa.chickenq.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +28,8 @@ import java.util.Locale;
 public class BoardListAdapter extends BaseAdapter {
     private Context context = null;
     private ArrayList<BoardData> listDatas = new ArrayList<>();
+
+    public static int search_menu, search_place;
 
     private class ViewHolder {
         public TextView title;
@@ -86,17 +88,7 @@ public class BoardListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        // Search
         BoardData listData = listDatas.get(position);
-        SharedPreferences pref = context.getSharedPreferences("search", Context.MODE_PRIVATE);
-        int search_menu = pref.getInt("menu", 0);
-        int search_place = pref.getInt("place", 0);
-        if (search_menu != 0 && listData.menu != search_menu-1) {
-            return null;
-        } else if (search_place != 0 && listData.location != search_place-1) {
-            return null;
-        }
-
         holder.title.setText(listData.title);
         holder.party_maker.setText(listData.name);
         holder.menu.setText(getMenu(listData.menu));
@@ -113,6 +105,13 @@ public class BoardListAdapter extends BaseAdapter {
             }
         } else {
             holder.ll_additional.setVisibility(View.GONE);
+        }
+
+        // Search
+        if ((search_menu != 0 && listData.menu != search_menu-1) ||
+                (search_place != 0 && listData.location != search_place-1)) {
+            Log.d("SEARCH", String.format("%d/%d/%d/%d", search_menu, listData.menu, search_place, listData.location));
+            convertView.setVisibility(View.GONE);
         }
 
         return convertView;
