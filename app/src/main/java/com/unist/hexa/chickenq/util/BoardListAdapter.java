@@ -67,17 +67,6 @@ public class BoardListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        // Search
-        BoardData listData = listDatas.get(position);
-        if ((search_menu != 0 && listData.menu != search_menu-1) ||
-                (search_place != 0 && listData.location != search_place-1)) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_listview_null, parent, false);
-            convertView.setTag(null);
-            return convertView;
-        }
-
         ViewHolder holder;
         if (convertView == null || convertView.getTag() == null) {
             holder = new ViewHolder();
@@ -98,6 +87,7 @@ public class BoardListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        BoardData listData = listDatas.get(position);
         holder.title.setText(listData.title);
         holder.party_maker.setText(listData.name);
         holder.menu.setText(getMenu(listData.menu));
@@ -114,6 +104,14 @@ public class BoardListAdapter extends BaseAdapter {
             }
         } else {
             holder.ll_additional.setVisibility(View.GONE);
+        }
+
+        LinearLayout ll_parent = (LinearLayout) convertView.findViewById(R.id.parent_layout);
+        if ((search_menu != 0 && listData.menu != search_menu-1) ||
+                (search_place != 0 && listData.location != search_place-1)) {
+            ll_parent.setVisibility(View.GONE);
+        } else {
+            ll_parent.setVisibility(View.VISIBLE);
         }
 
         return convertView;
