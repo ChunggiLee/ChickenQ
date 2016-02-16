@@ -15,14 +15,13 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".SignInActivity" android:screenOrientation="portrait"/>
         <activity android:name=".BoardActivity" android:screenOrientation="portrait"/>
         <activity android:name=".BoardWriteActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".BoardViewActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".BoardViewActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".PartyListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".SignUpActivity" android:screenOrientation="portrait"/>
 

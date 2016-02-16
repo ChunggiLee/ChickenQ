@@ -17,9 +17,9 @@
             android:layout_margin="10dp"
             android:padding="10dp">
             <ImageView
+                android:id="@+id/listItemImage"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:src="@drawable/list_chicken"
                 android:layout_weight="40"
                 android:background="@android:color/transparent"/>
             <LinearLayout

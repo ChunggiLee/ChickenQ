@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,18 +37,26 @@ public class BoardListAdapter extends BaseAdapter {
         public TextView party_maker;
         public TextView menu;
         public TextView limit_num;
-
+        public ImageView menuImage;
         // Additional
         public LinearLayout ll_additional;
         public TextView location;
         public TextView duration;
     }
-
     public BoardListAdapter(Context context) {
         this.context = context;
     }
 
-
+    public int getImage(int menu){
+        switch(menu){
+            case 0: return R.drawable.list_chicken;
+            case 1: return R.drawable.list_pizza;
+            case 2: return R.drawable.list_jjangke;
+            case 3: return R.drawable.list_jjangke;
+            case 4: return R.drawable.list_hambuger;
+            default: return 0;
+        }
+    }
     /**
      * BaseAdapter 메소드들
      */
@@ -82,6 +91,7 @@ public class BoardListAdapter extends BaseAdapter {
             holder.ll_additional = (LinearLayout) convertView.findViewById(R.id.ll_additional_data);
             holder.location = (TextView) convertView.findViewById(R.id.tv_location);
             holder.duration = (TextView) convertView.findViewById(R.id.tv_duration);
+            holder.menuImage = (ImageView) convertView.findViewById(R.id.listItemImage);
 
             convertView.setTag(holder);
         } else {
@@ -92,6 +102,7 @@ public class BoardListAdapter extends BaseAdapter {
         holder.title.setText(listData.title);
         holder.party_maker.setText(listData.name);
         holder.menu.setText(getMenu(listData.menu));
+        holder.menuImage.setImageResource(getImage(listData.menu));
         holder.limit_num.setText("" + listData.limit_num);
         if (listData.additional_data_visible) {
             holder.ll_additional.setVisibility(View.VISIBLE);
