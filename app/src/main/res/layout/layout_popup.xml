@@ -5,12 +5,13 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_vertical|center_horizontal"
+    android:paddingTop="130dp"
     android:background="@drawable/background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menu" />
+        android:text="메 뉴" />
 
     <Spinner
         android:id="@+id/MenuSpinner"
@@ -32,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Place" />
+        android:text="장 소" />
 
     <Spinner
         android:id="@+id/PlaceSpinner"
@@ -48,6 +49,7 @@
             android:id="@+id/OkButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="OK"/>
 
         <Button
