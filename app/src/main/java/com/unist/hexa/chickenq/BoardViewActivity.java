@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -87,7 +88,6 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         findViewById(R.id.JoinBtn).setOnClickListener(this);
         findViewById(R.id.DropBtn).setOnClickListener(this);
         findViewById(R.id.chat).setOnClickListener(this);
-
         CommentEdt = (EditText) findViewById(R.id.CommentEdt);
 
         setup_board();
@@ -363,5 +363,7 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         myList.setAdapter(adapter);
     }
 }
+
+
 
 
