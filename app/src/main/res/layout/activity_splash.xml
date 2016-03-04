@@ -3,6 +3,11 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/intro_chicken">
+    android:gravity="center"
+    android:background="#f4e3d3">
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="90dp"
+        android:src="@drawable/chicken"/>
 
 </LinearLayout>
