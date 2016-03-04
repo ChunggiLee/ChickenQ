@@ -1,114 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f4e3d3">
-
+    android:background="@drawable/party_context">
     <LinearLayout
-        android:gravity="center"
-        android:layout_gravity="center"
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"/>
+    <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_marginBottom="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/login_text"/>
-
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight="200">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:background="@drawable/yellow_box">
-
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="30"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40"
+            android:orientation="horizontal">
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ID: "
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:layout_marginLeft="4dp"
-                    android:id="@+id/IDEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textSize="20sp"
-                    android:background="@android:color/white"
-                    android:hint=" 아이디를 입력하세요."
-                    android:textColorHint="#c6c6c6" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="Password: " />
-
-                <EditText
-                    android:layout_marginLeft="4dp"
-                    android:id="@+id/PasswordEditText"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:inputType="textPassword"
-                    android:textSize="20sp"
-                    android:background="@android:color/white"
-                    android:textColorHint="#c6c6c6"
-                    android:hint=" 비밀번호를 입력하세요." />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/checkBtn"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/selector_check"
-                    android:background="@android:color/transparent" />
-                <CheckBox
-                    android:id="@+id/autoLoginCbx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:text="자동로그인" />
-
-            </LinearLayout>
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="12"/>
+            <TextView
+                android:id="@+id/TitleTextView"
+                android:layout_width="0px"
+                android:layout_height="20dp"
+                android:textSize="14dp"
+                android:layout_weight="60"/>
         </LinearLayout>
-        <TextView
-            android:layout_marginTop="20dp"
-            android:id="@+id/joinBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="#000"
-            android:background="?selectableItemBackgroundBorderless"
-            android:text="@string/sign_up" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="20"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="670">
+            <TextView
+                android:id="@+id/ContentTextView"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:layout_weight="100"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_height="0px"
+            android:layout_weight="70">
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:text="파티원"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:background="#ffdf4c"
+                android:id="@+id/PartyPeopleBtn" /><!--롱클릭 하고 있는 동안 팝업창?처럼 떠서 파티원이 보였으면 좋겠습니당.-->
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:text="파티추가"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:background="#ffdf4c"
+                android:id="@+id/JoinBtn" />
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:text="파티탈퇴"
+                android:gravity="center"
+                android:textSize="13dp"
+                android:background="@android:color/holo_red_light"
+                android:id="@+id/DropBtn" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="200">
+            <ScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/lv_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="#000000"
+                        android:dividerHeight="1.5dp">
+
+                    </ListView>
+
+                </LinearLayout>
+
+            </ScrollView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="20"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="70"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="50"
+                android:id="@+id/CommentEdt"
+                android:background="@null"/>
+            <ImageButton
+                android:id="@+id/chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0px"
+            android:layout_weight="7"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="fill_parent"
+        android:layout_weight="10"/>
 
-
-</FrameLayout>
+</LinearLayout>
