@@ -67,23 +67,19 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
         listView.setOnItemLongClickListener(this);
 
         // Get Board List
-        new AsyncJsonParser(new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == -1) {
-                    Toast.makeText(getActivity(), "네트워크 연결 오류", Toast.LENGTH_LONG).show();
-                } else {
-                    JSONObject jObj = (JSONObject) msg.obj;
-                    try {
-                        mAdapter.parseJson(jObj.getJSONArray("board"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, BOARD_URL).execute();
+        new AsyncJsonParser(mOnPostParseListener, BOARD_URL).execute();
     }
+
+    AsyncJsonParser.OnPostParseListener mOnPostParseListener = new AsyncJsonParser.OnPostParseListener() {
+        @Override
+        public void onPostParse(JSONObject jObj, int what) throws JSONException {
+            if (jObj == null) {
+                Toast.makeText(getActivity(), "네트워크 연결 오류", Toast.LENGTH_LONG).show();
+            } else {
+                mAdapter.parseJson(jObj.getJSONArray("board"));
+            }
+        }
+    };
 
     private void setup_fab(View rootView) {
         floatingActionMenu = (FloatingActionMenu) rootView.findViewById(R.id.menu1);

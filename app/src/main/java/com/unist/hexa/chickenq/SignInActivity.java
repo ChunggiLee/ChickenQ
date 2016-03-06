@@ -65,7 +65,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
             } else if (portal_pw.isEmpty()) {
                 Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
             } else {
-                AsyncJsonParser parser = new AsyncJsonParser(new LoginHandler(), CHECK_URL);
+                AsyncJsonParser parser = new AsyncJsonParser(mOnPostParseListener, CHECK_URL);
                 parser.addGetParam("portal_id", portal_id);
                 parser.addGetParam("key", getMD5(portal_pw));
                 parser.execute();
@@ -73,20 +73,12 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private class LoginHandler extends Handler {
+    AsyncJsonParser.OnPostParseListener mOnPostParseListener = new AsyncJsonParser.OnPostParseListener() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            JSONObject jObj = (JSONObject) msg.obj;
-            String result = "";
-            try {
-                result = jObj.getString("result");
-            } catch (JSONException e) {
-            }
-
-            if (msg.what == -1) {
+        public void onPostParse(JSONObject jObj, int what) throws JSONException {
+            if (jObj == null) {
                 Toast.makeText(getApplicationContext(), "네트워크 상태를 확인해주세요", Toast.LENGTH_LONG).show();
-            } else if (result.compareTo("true") != 0) {
+            } else if (jObj.getString("result").compareTo("true") != 0) {
                 Toast.makeText(getApplicationContext(), "아이디나 비밀번호가 잘못되었습니다", Toast.LENGTH_LONG).show();
             } else {
                 SharedPreferences.Editor editor = loginPreferences.edit();

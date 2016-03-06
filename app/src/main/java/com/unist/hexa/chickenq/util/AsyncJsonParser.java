@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -29,18 +32,47 @@ import java.util.Set;
 public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
     private static final String TAG = "AsyncJsonParser";
 
+    public interface OnPostParseListener {
+        void onPostParse(JSONObject jObj, int what) throws JSONException;
+    }
+
+    public interface OnParseErrorListener {
+        void onParseError(JSONException e);
+    }
+
+    public OnPostParseListener onPostParseListener = new OnPostParseListener() {
+        @Override
+        public void onPostParse(JSONObject jObj, int what) {
+        }
+    };
+
+    public OnParseErrorListener onParseErrorListener = new OnParseErrorListener() {
+        @Override
+        public void onParseError(JSONException e) {
+            e.printStackTrace();
+        }
+    };
+
     private HashMap<String, String> getList, postList;
 
-    private Handler resultHandler;
+    // TODO temporary for array parameter
+    private ArrayList<String> getList2;
+
+    //    private Handler resultHandler;
     private String url;
     private Exception error;
     private int what = 0;
 
-    public AsyncJsonParser(Handler handler, String url) {
-        this.resultHandler = handler;
+    public AsyncJsonParser(OnPostParseListener callback, String url) {
+        onPostParseListener = callback;
         this.url = url;
         this.getList = new HashMap<>();
         this.postList = new HashMap<>();
+        this.getList2 = new ArrayList<>();
+    }
+
+    public void setHandleMessage(OnPostParseListener callback) {
+        onPostParseListener = callback;
     }
 
     public void setWhat(int what) {
@@ -49,6 +81,14 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
 
     public void addGetParam(String key, String value) {
         getList.put(key, value);
+    }
+
+    public void addGetParam(String key, int value) {
+        addGetParam(key, "" + value);
+    }
+
+    public void addGetParam(String param) {
+        getList2.add(param);
     }
 
     public void addPostParam(String key, String value) {
@@ -73,6 +113,14 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
             }
         }
 
+        if (!getList2.isEmpty()) {
+            if (getList.isEmpty())
+                url += "?";
+            for (String param : getList2) {
+                url += String.format("%s&", param);
+            }
+        }
+
         // Apply POST Parameters
         // TODO
 
@@ -91,16 +139,10 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-        if (resultHandler != null) {
-            if (jsonObject == null) {
-                Message msg = resultHandler.obtainMessage(-1);
-                msg.obj = error.getMessage();
-                resultHandler.sendMessage(msg);
-            } else {
-                Message msg = resultHandler.obtainMessage(what);
-                msg.obj = jsonObject;
-                resultHandler.sendMessage(msg);
-            }
+        try {
+            onPostParseListener.onPostParse(jsonObject, what);
+        } catch (JSONException e) {
+            onParseErrorListener.onParseError(e);
         }
     }
 
@@ -158,5 +200,26 @@ public class AsyncJsonParser extends AsyncTask<Void, Void, JSONObject> {
             }
         }
 
+    }
+
+    public static class ResultHandler<T> extends Handler {
+        private final WeakReference<T> mActivity;
+
+        public ResultHandler(T activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            T activity = mActivity.get();
+            if(activity != null) {
+                try {
+                    Method m = mActivity.get().getClass().getMethod("onPostParse", Message.class);
+                    m.invoke(activity, msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

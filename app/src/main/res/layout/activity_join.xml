@@ -7,7 +7,46 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="375"/>
+        android:layout_weight="375">
+
+        <Button
+            android:id="@+id/btn_checkid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:textSize="10dp"
+            android:text="중복확인"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:id="@+id/btn_checkpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:textSize="10dp"
+            android:text="패스워드 확인"
+            android:layout_gravity="bottom" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="asdfgh"
+            android:textSize="10dp"
+            android:layout_gravity="bottom" />
+
+        <EditText
+            android:id="@+id/edit_PasswordRe"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:hint="비밀번호를 입력하세요."
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -33,21 +72,15 @@
                 android:hint="아이디를 입력하세요."/>
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="10">
-                <Button
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:textSize="10dp"
-                    android:text="중복확인"/>
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="7.96"></LinearLayout>
             </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="70"/>
+            android:layout_weight="70">
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -75,37 +108,6 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="78"/>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="45"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="11"/>
-            <EditText
-                android:id="@+id/edit_name"
-                android:gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:textSize="10dp"
-                android:layout_weight="10"
-                android:inputType="text"
-                android:hint="이름을 입력하세요."/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="10">
-                <Button
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:textSize="10dp"
-                    android:text="실명확인"/>
-            </LinearLayout>
-        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -168,6 +170,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="10">
                 <Button
+                    android:id="@+id/btn_checknum"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
