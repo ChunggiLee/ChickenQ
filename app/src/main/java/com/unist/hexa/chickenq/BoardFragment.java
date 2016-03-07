@@ -51,15 +51,6 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
         BoardListAdapter.search_place = 0;
         BoardListAdapter.search_text = "";
 
-        // For scrolling ListView
-        final ScrollView scrollView = (ScrollView) rootView.findViewById(R.id.scrollview);
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                scrollView.requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
         // ListView setting
         mAdapter = new BoardListAdapter(getActivity());
         listView.setAdapter(mAdapter);
