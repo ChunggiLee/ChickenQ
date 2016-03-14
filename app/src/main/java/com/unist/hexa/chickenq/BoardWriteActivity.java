@@ -215,7 +215,7 @@ public class BoardWriteActivity extends Activity {
         try{
             URL url = new URL("http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
 
-            Log.d("url : ", "http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
+            //Log.d("url : ", "http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
