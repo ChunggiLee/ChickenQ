@@ -7,8 +7,8 @@
     <Button
         android:id="@+id/UploadButton"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#fac20c"
+        android:layout_height="30dp"
+        android:background="@android:color/holo_purple"
         android:text="upload"
         android:textColor="#ffffff"/>
     <FrameLayout
@@ -61,7 +61,8 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="5dp"
-        android:background="#fac20c">
+        android:background="#fac20c"
+        android:elevation="5dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
