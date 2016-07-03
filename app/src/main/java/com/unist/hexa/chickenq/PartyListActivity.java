@@ -11,5 +11,6 @@ public class PartyListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party_list);
+
     }
 }

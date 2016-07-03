@@ -3,23 +3,10 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/party"
-    android:paddingTop="20dp">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0px"
-        android:layout_weight="10"/>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0px"
-        android:layout_weight="120">
+    android:background="#f4e3d3">
         <ListView
+            android:id="@+id/my_party"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
         </ListView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0px"
-        android:layout_weight="30"/>
 </LinearLayout>
