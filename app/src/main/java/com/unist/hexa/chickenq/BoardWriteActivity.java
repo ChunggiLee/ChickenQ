@@ -2,14 +2,11 @@ package com.unist.hexa.chickenq;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewManager;
@@ -18,10 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.unist.hexa.chickenq.util.BoardData;
@@ -39,7 +36,8 @@ public class BoardWriteActivity extends Activity {
     EditText TitleEdt, ContentEdt;
     String TitleStr, ContentStr, MenuStr, PeopleStr, PlaceStr, start_time;
     int _id, user_id=10032, MenuNum, PeopleNum, PlaceNum, duration;
-    Button MenuBtn, PeopleBtn, PlaceBtn, UploadBtn;
+    ImageButton MenuBtn, PeopleBtn, PlaceBtn;
+    Button UploadBtn;
     Window win;
     LinearLayout linear;
     ArrayList<String> TimeList;
@@ -52,7 +50,7 @@ public class BoardWriteActivity extends Activity {
         TitleEdt = (EditText) findViewById(R.id.TitleEditText);
         ContentEdt = (EditText) findViewById(R.id.ContentEdit);
 
-        MenuBtn = (Button)findViewById(R.id.MenuButton);
+        MenuBtn = (ImageButton)findViewById(R.id.MenuButton);
         MenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +59,7 @@ public class BoardWriteActivity extends Activity {
         });
 
 
-        PeopleBtn = (Button)findViewById(R.id.PeopleButton);
+        PeopleBtn = (ImageButton)findViewById(R.id.PeopleButton);
         PeopleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +67,7 @@ public class BoardWriteActivity extends Activity {
             }
         });
 
-        PlaceBtn = (Button)findViewById(R.id.PlaceButton);
+        PlaceBtn = (ImageButton)findViewById(R.id.PlaceButton);
         PlaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +83,7 @@ public class BoardWriteActivity extends Activity {
             }
         });
 
-        Button TimeBtn = (Button) findViewById(R.id.TimeBtn);
+        ImageButton TimeBtn = (ImageButton) findViewById(R.id.TimeBtn);
         TimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,7 +104,7 @@ public class BoardWriteActivity extends Activity {
                     public void onClick(View v) {
                         ((ViewManager) linear.getParent()).removeView(linear);
                         TextView durationTxt = (TextView) findViewById(R.id.durationTxt);
-                        durationTxt.setText("  대기시간(분) : " + duration + "분");
+                        durationTxt.setText("대기시간: " + duration + "분");
                     }
                 });
 

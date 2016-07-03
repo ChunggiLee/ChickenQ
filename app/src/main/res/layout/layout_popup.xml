@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:gravity="center_vertical|center_horizontal"
-    android:paddingTop="130dp"
-    android:background="@drawable/background">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="메 뉴" />
-
-    <Spinner
-        android:id="@+id/MenuSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="80dp" />
-
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="People" />
-
-    <Spinner
-        android:id="@+id/PeopleSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="80dp" /> !-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="장 소" />
-
-    <Spinner
-        android:id="@+id/PlaceSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="80dp" />
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#90000000">
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/OkButton"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:background="#ffffff">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="메 뉴" />
 
-            android:text="OK"/>
-
-        <Button
-            android:id="@+id/CancelButton"
+        <Spinner
+            android:id="@+id/MenuSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"/>
+            android:paddingLeft="80dp" />
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="People" />
+
+        <Spinner
+            android:id="@+id/PeopleSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="80dp" /> !-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장 소" />
+
+        <Spinner
+            android:id="@+id/PlaceSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="80dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/OkButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#fac20c"
+                android:text="OK"/>
+
+            <Button
+                android:id="@+id/CancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"/>
+        </LinearLayout>
+
     </LinearLayout>
-
 </LinearLayout>
