@@ -1,2 +1,0 @@
-# ChickenQ
-ChickenQ
