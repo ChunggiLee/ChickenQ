@@ -38,6 +38,14 @@
                     android:elevation="8dp"
                     android:layout_weight="1"
                     android:text="Members"/>
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:textColor="#ffffff"
+                    android:src="@drawable/kakao"
+                    android:id="@+id/Kakao_btn" />
                 <Button
                     android:layout_width="30dp"
                     android:layout_height="30dp"

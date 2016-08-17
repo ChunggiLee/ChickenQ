@@ -25,6 +25,8 @@
         <activity android:name=".PartyListActivity" android:screenOrientation="portrait"/>
         <activity android:name=".SignUpActivity" android:screenOrientation="portrait"/>
 
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key" />
+
     </application>
 
 </manifest>

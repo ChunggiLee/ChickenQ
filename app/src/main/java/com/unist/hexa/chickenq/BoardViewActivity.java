@@ -21,6 +21,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kakao.kakaolink.AppActionBuilder;
+import com.kakao.kakaolink.KakaoLink;
+import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
+import com.kakao.util.KakaoParameterException;
 import com.unist.hexa.chickenq.util.BoardData;
 
 import org.json.JSONObject;
@@ -37,7 +41,10 @@ import java.util.HashMap;
  */
 public class BoardViewActivity extends Activity implements View.OnClickListener {
 
-    String setupChatURL, text, SpaceStr="", nameStr, comment, name, portal;
+    private final String imgSrcLink = "http://chunggi.net/icon.png";
+    private KakaoLink kakaoLink;
+    private KakaoTalkLinkMessageBuilder kakaoTalkLinkMessageBuilder;
+    String setupChatURL, text, SpaceStr="", nameStr, comment, name, portal, title, contents;
     String userIdStr[];
     Bundle bundle;
     BoardData boardData;
@@ -52,6 +59,7 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
     private final Handler handler = new Handler();
     HashMap<String, String> map;
     ImageButton cancelBtn;
+
 
     TextView txt;
     private int id1;
@@ -70,8 +78,8 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         boardData = bundle.getParcelable("boardData");
 
         // set view information
-        final String title = boardData.title;
-        final String contents = "메뉴 : " + SelectMenu(boardData.menu) + '\n'
+        title = boardData.title;
+        contents = "메뉴 : " + SelectMenu(boardData.menu) + '\n'
                 + "인원 : " + SelectPeople(boardData.limit_num) + '\n'
                 + "장소 : " + SelectPlace(boardData.location) + '\n'
                 + "올린 시간 : " + boardData.start_time + '\n'
@@ -86,7 +94,16 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         findViewById(R.id.JoinBtn).setOnClickListener(this);
         findViewById(R.id.DropBtn).setOnClickListener(this);
         findViewById(R.id.chat).setOnClickListener(this);
+        findViewById(R.id.Kakao_btn).setOnClickListener(this);
         CommentEdt = (EditText) findViewById(R.id.CommentEdt);
+
+        // Connect kakako
+        try {
+            kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
+            kakaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+        } catch (KakaoParameterException e) {
+            e.getMessage();
+        }
 
         // Set chat list content
         setup_board();
@@ -204,6 +221,10 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
                 setup_board();
                 Toast.makeText(this,"댓글을 쓰셨습니다..",Toast.LENGTH_SHORT ).show();
                 break;
+
+            case R.id.Kakao_btn:
+                sendLink(imgSrcLink);
+
 
         }
         CommentEdt.setText("");
@@ -381,6 +402,22 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    // Send image(link) kakao
+    private void sendLink(String imgSrcLink){
+        try {
+            kakaoTalkLinkMessageBuilder.addText(title + " " + contents)
+                    .addImage(imgSrcLink, 300, 300)
+                    //.addAppButton("자세히 보기", new AppActionBuilder().setUrl("market://details?id=com.unist.hexa.chickenq")
+                            //.build());
+            .build();
+            //.addAppButton("앱으로 이동")
+//      kakaoTalkLinkMessageBuilder.addWebButton("웹으로 이동");
+            kakaoLink.sendMessage(kakaoTalkLinkMessageBuilder, this);
+        } catch (KakaoParameterException e) {
+            e.getMessage();
         }
     }
 }
