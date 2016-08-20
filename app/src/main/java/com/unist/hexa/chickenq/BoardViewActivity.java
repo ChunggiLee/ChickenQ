@@ -72,8 +72,8 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
         oslist = new ArrayList<HashMap<String, String>>();
 
         // parse id, portal_id, and boardData
-        id1 = getSharedPreferences("setting_login", 0).getInt("id", 0);
-        portal  = getSharedPreferences("setting_login", 0).getString("portal_id", "");
+        id1 = getSharedPreferences("setting_login", 0).getInt("uid", 0);
+        portal  = getSharedPreferences("setting_login", 0).getString("id", "");
         bundle = getIntent().getExtras();
         boardData = bundle.getParcelable("boardData");
 
@@ -285,6 +285,7 @@ public class BoardViewActivity extends Activity implements View.OnClickListener 
 
                 // Set information
                 num = json.getInt("num");
+                Log.d("BoardViewActivity", num+"");
 
                 if (num == 0) {
                     text = "현재 파티에 아무도 없습니다.";

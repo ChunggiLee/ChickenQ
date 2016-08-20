@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.unist.hexa.chickenq.util.AsyncJsonParser;
@@ -36,11 +37,12 @@ public class SplashActivity extends Activity {
         @Override
         public void run() {
             if (loginPreferences.getBoolean("auto_login", false)) {
-                final String portal_id = loginPreferences.getString("portal_id", "");
+                final String id = loginPreferences.getString("id", "");
                 final String key = loginPreferences.getString("key", "");
+                Log.d("SplashActivity", id + key);
 
                 AsyncJsonParser parser = new AsyncJsonParser(mOnPostParseListener, CHECK_URL);
-                parser.addGetParam("portal_id", portal_id);
+                parser.addGetParam("id", id);
                 parser.addGetParam("key", key);
                 parser.execute();
             } else {

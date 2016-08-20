@@ -82,8 +82,9 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(), "아이디나 비밀번호가 잘못되었습니다", Toast.LENGTH_LONG).show();
             } else {
                 SharedPreferences.Editor editor = loginPreferences.edit();
-                editor.putString("portal_id", etID.getText().toString());
-                editor.putString("key", getMD5(etPW.getText().toString()));
+                editor.putString("id", etID.getText().toString());
+                editor.putInt("uid", jObj.getInt("uid"));
+                editor.putString("key", etPW.getText().toString());
                 ID_URL += etID.getText().toString();
                 urlReadFunc();
                 if (ckbAutoLogin.isChecked())

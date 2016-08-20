@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewManager;
@@ -21,10 +23,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unist.hexa.chickenq.util.AsyncJsonParser;
 import com.unist.hexa.chickenq.util.BoardData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by user on 2015-08-11.
@@ -35,9 +43,10 @@ public class BoardWriteActivity extends Activity {
     private static final String WriteUrl = "http://chickenq.hexa.pro/board/write.php?";
     EditText TitleEdt, ContentEdt;
     String TitleStr, ContentStr, MenuStr, PeopleStr, PlaceStr, start_time;
-    int _id, user_id=10032, MenuNum, PeopleNum, PlaceNum, duration;
+    int _id, user_id, MenuNum, PeopleNum, PlaceNum, duration, id1;
     ImageButton MenuBtn, PeopleBtn, PlaceBtn;
     Button UploadBtn;
+    BoardData boardData;
     Window win;
     LinearLayout linear;
     ArrayList<String> TimeList;
@@ -208,21 +217,31 @@ public class BoardWriteActivity extends Activity {
         ContentStr = ContentEdt.getText().toString();
         Intent intent = new Intent(BoardWriteActivity.this, BoardViewActivity.class);
 
-        BoardData boardData = new BoardData(_id, user_id, TitleStr, ContentStr, start_time, MenuNum, PeopleNum, PlaceNum, duration, "test", false);
+
+        // 시스템으로부터 현재시간(ms) 가져오기
+        long now = System.currentTimeMillis();
+        // Data 객체에 시간을 저장한다.
+        Date date = new Date(now);
+        // 각자 사용할 포맷을 정하고 문자열로 만든다.
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        start_time =sdfNow.format(date);
+        boardData = new BoardData(_id, user_id, TitleStr, ContentStr, start_time, MenuNum, PeopleNum, PlaceNum, duration, "test", false);
         intent.putExtra("boardData", boardData);
 
+        //Log.d("BoardWriteActivity", id1+"");
         try{
-            URL url = new URL("http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
+            id1 = getSharedPreferences("setting_login", 0).getInt("uid", 0);
 
-            //Log.d("url : ", "http://chickenq.hexa.pro/board/write.php?id=" + user_id + "&title=" + TitleStr + "&cont=" + ContentStr + "&dur=" + duration + "&menu=" + MenuNum + "&limit=" + PeopleNum + "&locat=" + PlaceNum);
-
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            url.openStream();
-            int id1 = getSharedPreferences("setting_login", 0).getInt("id", 0);
-            URL UrlStr = new URL ("http://chickenq.hexa.pro/party/join.php?boardid=" + boardData._id + "&userid=" + id1);
-            UrlStr.openStream();
+            String writeUrl = "http://chickenq.hexa.pro/board/write.php";
+            AsyncJsonParser parser = new AsyncJsonParser(mOnPostParseListener, writeUrl);
+            parser.addGetParam("id", id1);
+            parser.addGetParam("title", TitleStr);
+            parser.addGetParam("cont", ContentStr);
+            parser.addGetParam("dur", duration);
+            parser.addGetParam("menu", MenuNum);
+            parser.addGetParam("limit", PeopleNum);
+            parser.addGetParam("locat", PlaceNum);
+            parser.execute();
 
             finish();
             startActivity(intent);
@@ -282,4 +301,11 @@ public class BoardWriteActivity extends Activity {
             }
         });
     }
+    AsyncJsonParser.OnPostParseListener mOnPostParseListener = new AsyncJsonParser.OnPostParseListener() {
+        @Override
+        public void onPostParse(JSONObject jObj, int what) throws JSONException {
+
+        }
+    };
+
 }
