@@ -89,7 +89,7 @@ public class BoardListAdapter extends BaseAdapter {
             holder.menu = (TextView) convertView.findViewById(R.id.tv_menu);
             holder.limit_num = (TextView) convertView.findViewById(R.id.tv_limit_num);
             holder.ll_additional = (LinearLayout) convertView.findViewById(R.id.ll_additional_data);
-            holder.location = (TextView) convertView.findViewById(R.id.tv_location);
+            holder.location = (TextView) convertView.findViewById(R.id.tv_location_num);
             holder.duration = (TextView) convertView.findViewById(R.id.tv_duration);
             holder.menuImage = (ImageView) convertView.findViewById(R.id.listItemImage);
 
@@ -103,7 +103,8 @@ public class BoardListAdapter extends BaseAdapter {
         holder.party_maker.setText(listData.name);
         holder.menu.setText(getMenu(listData.menu));
         holder.menuImage.setImageResource(getImage(listData.menu));
-        holder.limit_num.setText("" + listData.limit_num);
+        holder.limit_num.setText("" + listData.limit_num + "명");
+        holder.location.setText(getLocation(listData.location));
         if (listData.additional_data_visible) {
             holder.ll_additional.setVisibility(View.VISIBLE);
             holder.location.setText("위치: " + listData.location);
@@ -138,6 +139,25 @@ public class BoardListAdapter extends BaseAdapter {
             case 3: return "탕수육";
             case 4: return "패스트푸드";
             default: return "ERROR";
+        }
+    }
+
+    String getLocation(int location) {
+        switch (location) {
+            case 0:
+                return "공학관";
+            case 1:
+                return "경영관";
+            case 2:
+                return "학생회관";
+            case 3:
+                return "학생회관";
+            case 4:
+                return "기숙사";
+            case 5:
+                return "기숙사 휴게실";
+            default:
+                return "ERROR";
         }
     }
 
