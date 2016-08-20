@@ -38,7 +38,7 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
         getActivity().setTitle("게시판");
 
         setup_board(rootView);
-        setup_fab(rootView);
+        setup_fab();
 
         return rootView;
     }
@@ -72,9 +72,9 @@ public class BoardFragment extends android.support.v4.app.Fragment implements Vi
         }
     };
 
-    private void setup_fab(View rootView) {
-        floatingActionMenu = (FloatingActionMenu) rootView.findViewById(R.id.menu1);
-        rootView.findViewById(R.id.fab_write).setOnClickListener(this);
+    private void setup_fab() {
+        floatingActionMenu = (FloatingActionMenu) getActivity().findViewById(R.id.menu1);
+        getActivity().findViewById(R.id.fab_write).setOnClickListener(this);
 //        rootView.findViewById(R.id.fab_search).setOnClickListener(this);
     }
 
