@@ -1,5 +1,6 @@
 package com.unist.hexa.chickenq;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -46,7 +47,8 @@ public class BoardActivity extends AppCompatActivity implements NavigationView.O
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
@@ -72,6 +74,15 @@ public class BoardActivity extends AppCompatActivity implements NavigationView.O
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id){
+            case R.id.nav_info:
+                Intent intent = new Intent(this, InformationActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.nav_board:
+                Intent intent1 = new Intent(this, BoardActivity.class);
+                startActivity(intent1);
+                break;
             default:
                 Log.d("index is ", Integer.toString(id));
         }
