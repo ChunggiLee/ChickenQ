@@ -110,6 +110,7 @@ public class BoardWriteActivity extends Activity {
 
             }
         });
+        duration=5;
     }
 
     private void MenuDialogSelectOption() {

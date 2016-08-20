@@ -3,8 +3,10 @@ package com.unist.hexa.chickenq;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import com.unist.hexa.chickenq.util.EmailClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URL;
 
 
 public class SignUpActivity extends Activity implements View.OnClickListener {
@@ -30,7 +34,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
     private String code;
     int check = 0;
     boolean checkid, checknum, checkpwd = false;
-    EditText etID, etPassword, etEmail, etNumber, etPasswordRe;
+    EditText etID, etPassword, etEmail, etNumber, etPasswordRe, etName;
     TextView txt;
     CheckBox chkAgree;
 
@@ -39,6 +43,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        etName = (EditText) findViewById(R.id.user_name);
         etID = (EditText) findViewById(R.id.edit_ID);
         etPassword = (EditText) findViewById(R.id.edit_Password);
         etPasswordRe = (EditText) findViewById(R.id.edit_PasswordRe);
@@ -103,7 +108,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(), "이미 존재하는 아이디입니다", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "사용 가능한 아이디입니다", Toast.LENGTH_LONG).show();
-                //checkid = true;
+                checkid = true;
             }
         }
     };
@@ -167,6 +172,12 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                 }
                 if (chkAgree.isChecked()) {
                     Toast.makeText(getApplicationContext(), getString(R.string.signup_finish), Toast.LENGTH_SHORT).show();
+                    String urlStr = "http://chickenq.hexa.pro/user/newsignup.php?id=" + etID.getText().toString()
+                            + "&pwd=" + etPassword.getText().toString()
+                            + "&mail=" + etEmail.getText().toString()
+                            + "&name=" + etName.getText().toString();
+                    //Log.d("SignUpActivity", urlStr);
+                    urlOpenFunc(urlStr);
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(intent);
                     finish();
@@ -174,6 +185,23 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(getApplicationContext(), getString(R.string.signup_need_agree), Toast.LENGTH_SHORT).show();
                 }
                 break;
+        }
+    }
+
+    public void urlOpenFunc(String URL) {
+        // Send Url to server
+        try{
+            java.net.URL url = new URL(URL);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            //Log.d("BoardViewActivity", "URLTEST : " + URL);
+
+            url.openStream();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "오류!", Toast.LENGTH_LONG).show();
         }
     }
 

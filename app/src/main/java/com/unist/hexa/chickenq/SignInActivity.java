@@ -57,17 +57,17 @@ public class SignInActivity extends Activity implements View.OnClickListener {
             Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.checkBtn) {
-            final String portal_id = etID.getText().toString();
-            final String portal_pw = etPW.getText().toString();
+            final String id = etID.getText().toString();
+            final String pw = etPW.getText().toString();
 
-            if (portal_id.isEmpty()) {
+            if (id.isEmpty()) {
                 Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
-            } else if (portal_pw.isEmpty()) {
+            } else if (pw.isEmpty()) {
                 Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
             } else {
                 AsyncJsonParser parser = new AsyncJsonParser(mOnPostParseListener, CHECK_URL);
-                parser.addGetParam("portal_id", portal_id);
-                parser.addGetParam("key", getMD5(portal_pw));
+                parser.addGetParam("id", id);
+                parser.addGetParam("key", pw);
                 parser.execute();
             }
         }
